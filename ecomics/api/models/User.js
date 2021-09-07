@@ -31,8 +31,8 @@ User.init({
         type : S.STRING,
         allowNull: false
     },
-    hash: {
-        type: S.STRING,
+    token: {
+        type: S.TEXT,
     },
     privilegios: {
         type: S.BOOLEAN,
