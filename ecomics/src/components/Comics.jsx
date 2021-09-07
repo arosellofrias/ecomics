@@ -11,7 +11,7 @@ export default ()=>{
         <div>
         {comics.map((singleComic) => (
             <div>
-                {console.log("SINGLECOMICcCC",singleComic.id)}
+              {/*   {console.log("SINGLECOMICcCC",singleComic.id)} */}
                 <h1>{singleComic.title}</h1>
                 <button /* onClick={()=>dispatch(singleComicRequest(singleComic.id))} */><Link to={`/comics/${singleComic.id}`}>info</Link></button>
                 {/* <img src={}/> */}
