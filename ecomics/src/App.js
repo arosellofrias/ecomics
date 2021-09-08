@@ -4,8 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getComicsRequest } from "./state/comics";
 import Comics from "./components/Comics";
 import SingleComic from "./components/SingleComic";
+
 import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
+
+import Register from "./components/Register";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -37,13 +41,16 @@ function App() {
       </div>
 
       <Switch>
+
         <Route exact path="/comics" component={Comics} />
         <Route path="/comics/:id" component={SingleComic} />
         <Route path="/login" component={LoginUser} />
         <Route path="/logout" component={Logout} />
+          <Route path ="/register" component={Register}/>
 
         <Redirect to="/comics" />
       </Switch>
+
     </div>
   );
 }
