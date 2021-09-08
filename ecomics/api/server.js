@@ -4,10 +4,15 @@ const app = express();
 const volleyball = require("volleyball");
 const db = require("./db")
 const routes = require("./routes")
+
+const cors = require('cors')
+
+
 const {Cart, CartItem, Order, OrderItem, Product, User} = require("./models")
 
 // logging middleware
 app.use(volleyball);
+app.use(cors())
 
 app.use(express.static("build"))
 
@@ -34,8 +39,12 @@ app.use((err, req, res, next) => {
 db.sync({force:false})
 .then(function () {
     // Recién ahora estamos seguros que la conexión fue exitosa
+
+    app.listen(3001, function () {
+
     
-    app.listen(3000, function () {
+   
+
         console.log('Server is listening on port 3001!');
     });
 })
