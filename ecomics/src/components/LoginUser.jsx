@@ -1,16 +1,28 @@
+import axios from "axios";
 import React, { useState } from "react";
 import "./compStyles/Login.css";
 
 const LoginUser = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [isLoggedIn, setIsLoggedIn ] = useState({})
+  
+  const loginSubmit = (body,e)=>{
+    console.log("BODY==>",body)
+    e.preventDefault()
+    axios.post("api/user/login",body)
+    .then(res=>res.data)
+    .then(body=>setIsLoggedIn(body))
+  }
+  
   return (
     <div className="login">
-      <form className="login_form">
         <h1>Logueate acá 🦸‍♂️</h1>
-
+        
+      <form className="login_form" onSubmit={(e)=>(loginSubmit({
+        email:email,
+        password: password
+      },e))}>
         <input
           type="email"
           placeholder="Email"
