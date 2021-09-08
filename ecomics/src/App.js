@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getComicsRequest } from "./state/comics"; 
 import Comics from "./components/Comics"
 import SingleComic from "./components/SingleComic";
+import Register from "./components/Register";
 
 function App() {
 
@@ -40,7 +41,8 @@ const dispatch = useDispatch();
     </div>
       <Switch>
       <Route exact path="/comics" component={Comics}/>
-      <Route path ="/comics/:id" component={SingleComic}/>
+        <Route path="/comics/:id" component={SingleComic} />
+        <Route path ="/register" component={Register}/>
       <Redirect to="/comics"/>
       </Switch>  
     </div>
