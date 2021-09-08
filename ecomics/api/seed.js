@@ -9,15 +9,6 @@
     "descripcion" : '"WORLD WAR SHE-HULK" Continues! After being taken prisoner by the Russian Winter Guard and sent to the notorious assassin-training academy known as the Red Room, She-Hulk has been transformed into something terrifying. And now the Winter Hulk has been unleashed upon the world. And the only one who can stop her…is Gorilla-Man?'
 },
 {
-    "titulo": "Avengers (2018) #48 (Variant)",
-    "formato": "Comic",
-    "imagen": "https://i.annihil.us/u/prod/marvel/i/mg/c/10/612d39fef0ac2/clean.jpg",
-    "precio": 800,
-    "paginas": 32,
-    "stock" : 10,
-    "descripcion" : '"WORLD WAR SHE-HULK" Continues! After being taken prisoner by the Russian Winter Guard and sent to the notorious assassin-training academy known as the Red Room, She-Hulk has been transformed into something terrifying. And now the Winter Hulk has been unleashed upon the world. And the only one who can stop her…is Gorilla-Man?'
-},
-{
     "titulo": "Avengers (2018) #47 (Variant)",
     "formato": "Comic",
     "imagen": "https://i.annihil.us/u/prod/marvel/i/mg/f/40/61042030a1e84/clean.jpg",
