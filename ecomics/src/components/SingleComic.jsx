@@ -11,7 +11,6 @@ export default (props)=>{
     const matchProps =useParams()
     const paramsId = matchProps.id */
     const dispatch = useDispatch();
- renderizado-singleComics
     console.log("PROPS",props)
     const params = useParams()
     const paramsId = params.id
