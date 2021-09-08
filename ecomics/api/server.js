@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const volleyball = require("volleyball");
 const db = require("./db")
-// const routes = require("./routes")
+const routes = require("./routes")
+//const {Cart, CartItem, Order, OrderItem, Product, User} = require("./models")
 
 // logging middleware
 app.use(volleyball);
@@ -12,7 +13,9 @@ app.use(express.static("build"))
 
 // parsing middleware
 app.use(express.json());
-// app.use("/api",routes)
+
+app.use("/api",routes)
+
 
 
 app.use("/api", (req, res) => {

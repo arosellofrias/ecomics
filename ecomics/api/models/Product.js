@@ -8,14 +8,31 @@ Product.init({
         type: S.STRING,
         allowNull: false,
     },
+    formato : {
+        type: S.STRING,
+        allowNull: false,
+    },
+    imagenUrl : {
+        type: S.STRING,
+        allowNull: false,
+    },
     precio: {
         type: S.FLOAT,
         allowNull: false
     },
+    paginas : {
+        type : S.INTEGER,
+        allowNull: false,
+    },
     stock:{
         type: S.STRING,
         allowNull: false
+    },
+    descripcion: {
+        type: S.TEXT,
+        allowNull: true
     }
+
 
 },
 {

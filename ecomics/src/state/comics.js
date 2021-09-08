@@ -19,6 +19,6 @@ export const getComicsRequest = createAsyncThunk("COMICS", async(title) => {
     )
   })
 
-  export const singleComicReducer = createReducer({},{
+  export const singleComicReducer = createReducer([],{
     [singleComicRequest.fulfilled]: (state,action)=>action.payload
   })

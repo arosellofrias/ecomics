@@ -7,7 +7,11 @@ import { useState } from "react";
 
 
 export default (props)=>{
+    /* const [comic, setComic]=useState({})
+    const matchProps =useParams()
+    const paramsId = matchProps.id */
     const dispatch = useDispatch();
+ renderizado-singleComics
     console.log("PROPS",props)
     const params = useParams()
     const paramsId = params.id
@@ -35,6 +39,3 @@ export default (props)=>{
            
            
            {/* <img src={singleComic[0].urls[0].url}/> */}
-        </div>
-    )
-}
