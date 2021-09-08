@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
+
 import { comicsReducer, singleComicReducer } from "./comics"
 import registerReducer from "./userRegister";
 
@@ -16,3 +17,4 @@ const store = configureStore({
   
   export default store;
   
+
