@@ -39,3 +39,6 @@ export default (props)=>{
            
            
            {/* <img src={singleComic[0].urls[0].url}/> */}
+       </div>    
+   )   
+   }
