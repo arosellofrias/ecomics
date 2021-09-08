@@ -28,7 +28,11 @@ router.post("/register", async (req, res) => {
 
     // Create user in our database
     const user = await User.create({
+      nombre:nombre,
+      apellido:apellido,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
+      fechaDeNacimiento:fechaDeNacimiento,
+      direccion:direccion,
       password: encryptedPassword,
     });
 
