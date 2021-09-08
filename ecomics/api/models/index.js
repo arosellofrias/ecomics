@@ -31,8 +31,8 @@ Product.belongsToMany(Cart,{
     through : CartItem
 })
 
-Category.belongsToMany(Product)
-Product.hasOne(Category)
+Category.hasMany(Product)
+Product.belongsTo(Category)
 
 module.exports = {Cart, CartItem, Order, OrderItem, Product, User, Category}
 
