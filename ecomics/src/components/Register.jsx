@@ -2,6 +2,7 @@ import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { sendRegisterRequest } from "../state/userRegister";
+import "./compStyles/Login.css";
 
 
 export default () => {
@@ -33,9 +34,9 @@ export default () => {
   };
 
   return (
-    <div className="col-lg-8 offset-lg-2">
+    <div className="login">
       <h2>Register</h2>
-      <form name="form" onSubmit={handleSubmit}>
+      <form className="login_form" name="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Nombre</label>
           <input
@@ -103,15 +104,12 @@ export default () => {
               </div>
               <br></br>
         <div className="form-group">
-          <button className="btn btn-primary"><Link to="/login">Register</Link></button>
+          <button className="submit_btn"><Link to="/login">Register</Link></button>
           {registerUser.salt ? (
             <p>{`te registraste bien ${registerUser.nombre}`}</p>
           ) : (
             ""
           )}
-          <Link to="/login" className="btn btn-link">
-            Login
-          </Link>
         </div>
         {registerUser.token?<h3>Te registraste bien {registerUser.nombre} </h3>:""}
       </form>

@@ -35,7 +35,6 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Search/>
       <Switch>
         {/* <Route path="/search" component={Search}/> */}
         <Route exact path="/comics" component={Comics} />
