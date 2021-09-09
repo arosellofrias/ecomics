@@ -41,7 +41,7 @@ router.put("/:id",(req,res)=>{
         res.json(data[1])
     })
 })
-router.put("/:id",(req,res)=>{
+/* router.put("/:id",(req,res)=>{
     let id = req.params.id
 
     Product.update(req.body,
@@ -53,7 +53,7 @@ router.put("/:id",(req,res)=>{
         // console.log(data)
         res.json(data[1])
     })
-})
+}) */
 router.delete("/:id",(req,res)=>{
    let id = req.params.id
     Product.destroy({where:{id:id}})
