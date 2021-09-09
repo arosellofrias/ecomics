@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {Product} = require("../models")
+const {Product,Category} = require("../models")
+
 
 
 router.get("/",(req,res)=>{
@@ -21,12 +22,17 @@ router.get("/:id",(req,res)=>{
 })
 
 router.post("/",(req,res)=>{
+    let format = req.body.formato
     
-    Product.create(req.body)
-    .then(data=>{
-        // console.log(data)
-        res.json(data)
-    })
+    Category.findOne({ where: { nombre: format } })
+        .then((data)=>{
+            const total = {...req.body,categoryId:data.dataValues.id}//al req.body le agrego la key categoryId
+            console.log(total)
+            Product.create(total)
+                 .then(data=>{
+                res.json(data)
+                })
+        })
 })
 router.put("/:id",(req,res)=>{
     let id = req.params.id
