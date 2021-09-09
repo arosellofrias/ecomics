@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getComicsRequest } from "../state/comics";
+import { getComicsRequest, getComicsByTitle } from "../state/comics";
 
 
 export default ()=>{
     const dispatch = useDispatch();
 
-    const [comic, setComic] = React.useState("");
+    const [comic, setComic] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -15,13 +15,16 @@ export default ()=>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getComicsRequest(comic));
+    dispatch(getComicsByTitle(comic));
   };
+
+  const comicsByTitle = useSelector((state) => state.comicsByTitle);
 
 
 return(
     <div>
       <header>
+        {console.log("comicsBYTITLE==>>>",comicsByTitle )}
         <img src="https://pa1.narvii.com/6927/973868bc9d5ec592e6aaa7195c7c7a1a3bd115e8r1-500-267_hq.gif"></img>
       </header>
       <div>

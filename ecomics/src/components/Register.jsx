@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { sendRegisterRequest } from "../state/userRegister";
 
+
 export default () => {
   const dispatch = useDispatch();
   const registerUser = useSelector((state) => state.registerUser);
@@ -102,7 +103,7 @@ export default () => {
               </div>
               <br></br>
         <div className="form-group">
-          <button className="btn btn-primary">Register</button>
+          <button className="btn btn-primary"><Link to="/login">Register</Link></button>
           {registerUser.salt ? (
             <p>{`te registraste bien ${registerUser.nombre}`}</p>
           ) : (

@@ -1,26 +1,49 @@
 import * as React from "react";
 import {Link} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import {singleComicRequest} from "../state/comics"
+import {getComicsRequest} from "../state/comics"
+import styles from "./compStyles/comics.module.css"
 
 
 export default ()=>{
+    /* React.useEffect(()=>{
+        dispatch(getComicsRequest(),[])
+      }) */
     const comics = useSelector((state) => state.comics);
+    const isLoggedIn = useSelector((state) => state.isLoggedIn);
+    const comicsByTitle = useSelector((state) => state.comicsByTitle);
     const dispatch = useDispatch();
     return(
-        <div className="movies">
-        {comics.map((singleComic) => (
-            <div id={singleComic.id}>
+        <div className={styles.comics}>
+            {comicsByTitle.length == 0 ? comics.map((singleComic) => (
+            <div id={singleComic.id} className={styles.singleComic}>
                 <Link to={`/comics/${singleComic.id}`}>
-              {/*   {console.log("SINGLECOMICcCC",singleComic.id)} */}
-                <h1>{singleComic.nombre}</h1>
-                <img className="img" src={singleComic.imagenUrl}/>
-                <button  /* onClick={()=>dispatch(singleComicRequest(singleComic.id))} */  >{/* <Link to={`/comics/${singleComic.id}`}> */}+info{/* </Link> */}</button>
-                {/* <img src={}/> */}
+                <h1 className={styles.h1}>{singleComic.nombre}</h1>
+                <img className={styles.img} src={singleComic.imagenUrl}/>
+                <button>+info</button>
+                </Link>
+            </div>
+        )) : comicsByTitle.map((singleComic) => (
+            <div id={singleComic.id} className={styles.singleComic}>
+                <Link to={`/comics/${singleComic.id}`}>
+                <h1 className={styles.h1}>{singleComic.nombre}</h1>
+                <img  className={styles.img} src={singleComic.imagenUrl}/>
+                <button  >+info</button>
                 </Link>
 
             </div>
         ))}
+        {/* {comics.map((singleComic) => (
+            <div id={singleComic.id}>
+                <Link to={`/comics/${singleComic.id}`}>
+             
+                <h1>{singleComic.nombre}</h1>
+                <img className="img" src={singleComic.imagenUrl}/>
+                <button>+info </button>
+                </Link>
+
+            </div>
+        ))} */}
         
         
         </div>
