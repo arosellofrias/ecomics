@@ -25,10 +25,22 @@ export default (props)=>{
     },[]) */ 
     return(
         <div>
+            {console.log("FUNCA??=>>",singleComic)}
+
            {/*  {console.log("singleComic===>", singleComic)} */}
             {/* {console.log("SINGLECOMIC==>", singleComic[0])} */}
             {/* {console.log("COMIC", comic)} */}
-            {Object.keys(singleComic).length ? <h1>{singleComic[0].title}</h1> : <h1>Loading..</h1>}
+            {Object.keys(singleComic).length ? <>
+            <h1>{singleComic.nombre}</h1> 
+            <img className="img" src={singleComic.imagenUrl}/>
+            <p>{singleComic.descripcion}</p>
+            <h2>PRECIO:</h2>
+            <strong>{singleComic.precio}</strong>
+            <br></br>
+            <h2>STOCK:</h2>
+            <strong>{singleComic.stock}</strong>
+            </>
+            : <h1>Loading..</h1>}
             
             {/* <h1>{singleComic}</h1> */}
          {/*    {console.log("COMC=>>", comic)} */}

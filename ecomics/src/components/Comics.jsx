@@ -10,12 +10,14 @@ export default ()=>{
     return(
         <div className="movies">
         {comics.map((singleComic) => (
-            <div>
+            <div id={singleComic.id}>
+                <Link to={`/comics/${singleComic.id}`}>
               {/*   {console.log("SINGLECOMICcCC",singleComic.id)} */}
                 <h1>{singleComic.nombre}</h1>
                 <img className="img" src={singleComic.imagenUrl}/>
-                <button  /* onClick={()=>dispatch(singleComicRequest(singleComic.id))} */  ><Link to={`/comics/${singleComic.id}`}>info</Link></button>
+                <button  /* onClick={()=>dispatch(singleComicRequest(singleComic.id))} */  >{/* <Link to={`/comics/${singleComic.id}`}> */}+info{/* </Link> */}</button>
                 {/* <img src={}/> */}
+                </Link>
 
             </div>
         ))}

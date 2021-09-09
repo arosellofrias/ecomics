@@ -1,9 +1,11 @@
 import * as React from "react";
+import { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getComicsRequest } from "./state/comics";
 import Comics from "./components/Comics";
 import SingleComic from "./components/SingleComic";
+import Search from "./components/Search"
 
 import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
@@ -14,7 +16,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const dispatch = useDispatch();
-  const [comic, setComic] = React.useState("");
+  /* const [comic, setComic] = React.useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -25,25 +27,15 @@ function App() {
     e.preventDefault();
     dispatch(getComicsRequest(comic));
   };
-
+ */
+  useEffect(()=>{
+    dispatch(getComicsRequest(),[])
+  })
   return (
     <div className="App">
-      <Navbar></Navbar>
-      <header>
-        <img src="https://pa1.narvii.com/6927/973868bc9d5ec592e6aaa7195c7c7a1a3bd115e8r1-500-267_hq.gif"></img>
-      </header>
-      <div>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <h3>Buscate un comic:</h3>
-          <input
-            placeholder="Mandale un comic"
-            onChange={(e) => handleChange(e)}
-          ></input>
-        </form>
-      </div>
-
+      <Navbar/>
       <Switch>
-
+        <Route path="/search" component={Search}/>
         <Route exact path="/comics" component={Comics} />
         <Route path="/comics/:id" component={SingleComic} />
         <Route path="/login" component={LoginUser} />
