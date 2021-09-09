@@ -8,11 +8,12 @@ export default ()=>{
     const comics = useSelector((state) => state.comics);
     const dispatch = useDispatch();
     return(
-        <div>
+        <div className="movies">
         {comics.map((singleComic) => (
             <div>
               {/*   {console.log("SINGLECOMICcCC",singleComic.id)} */}
-                <h1>{singleComic.title}</h1>
+                <h1>{singleComic.nombre}</h1>
+                <img className="img" src={singleComic.imagenUrl}/>
                 <button  /* onClick={()=>dispatch(singleComicRequest(singleComic.id))} */  ><Link to={`/comics/${singleComic.id}`}>info</Link></button>
                 {/* <img src={}/> */}
 
