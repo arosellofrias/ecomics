@@ -30,12 +30,14 @@ function App() {
  */
   useEffect(()=>{
     dispatch(getComicsRequest(),[])
-  })
+  }) 
+  
   return (
     <div className="App">
       <Navbar/>
+      <Search/>
       <Switch>
-        <Route path="/search" component={Search}/>
+        {/* <Route path="/search" component={Search}/> */}
         <Route exact path="/comics" component={Comics} />
         <Route path="/comics/:id" component={SingleComic} />
         <Route path="/login" component={LoginUser} />

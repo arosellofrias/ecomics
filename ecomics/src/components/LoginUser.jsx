@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./compStyles/Login.css";
 import {sendLoginRequest} from "../state/userLogin"
@@ -20,7 +21,7 @@ const LoginUser = () => {
   
   return (
     <div className="login">
-      {console.log("ISLOGGEDIN",isLoggedIn )}
+      {console.log("ISLOGGEDIN===>>>",isLoggedIn )}
         <h1>Logueate acá 🦸‍♂️</h1>
         
         
@@ -41,7 +42,7 @@ const LoginUser = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" className="submit_btn">
-          Ingresar
+          <Link to="/comics">Ingresar</Link>
         </button>
       </form>
     </div>
