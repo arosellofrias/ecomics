@@ -9,6 +9,7 @@ import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
 
 import Register from "./components/Register";
+import Navbar from "./components/Navbar";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar></Navbar>
       <header>
         <img src="https://pa1.narvii.com/6927/973868bc9d5ec592e6aaa7195c7c7a1a3bd115e8r1-500-267_hq.gif"></img>
       </header>
