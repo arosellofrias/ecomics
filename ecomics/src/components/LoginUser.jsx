@@ -10,7 +10,7 @@ const LoginUser = () => {
   const loginSubmit = (body,e)=>{
     console.log("BODY==>",body)
     e.preventDefault()
-    axios.post("api/user/login",body)
+    axios.post("http://localhost:3001/api/user/login",body)
     .then(res=>res.data)
     .then(body=>setIsLoggedIn(body))
   }
@@ -18,6 +18,7 @@ const LoginUser = () => {
   return (
     <div className="login">
         <h1>Logueate acá 🦸‍♂️</h1>
+        {console.log("ISLOGGEDIN=>>>", isLoggedIn)}
         
       <form className="login_form" onSubmit={(e)=>(loginSubmit({
         email:email,
