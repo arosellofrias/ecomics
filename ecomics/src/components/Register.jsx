@@ -31,8 +31,6 @@ export default () => {
       .catch((err) => console.log(err));
   };
 
-  console.log("USERRRRR", usr);
-
   return (
     <div className="col-lg-8 offset-lg-2">
       <h2>Register</h2>
@@ -111,9 +109,10 @@ export default () => {
             ""
           )}
           <Link to="/login" className="btn btn-link">
-            Cancel
+            Login
           </Link>
         </div>
+        {registerUser.token?<h3>Te registraste bien {registerUser.nombre} </h3>:""}
       </form>
     </div>
   );

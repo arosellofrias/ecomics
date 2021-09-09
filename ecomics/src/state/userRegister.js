@@ -2,7 +2,6 @@ import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 export const sendRegisterRequest = createAsyncThunk("REGISTER", (obj) => {
-  console.log("OBJETO_REGISTER",obj)
     return axios.post("http://localhost:3001/api/user/register", obj).then((r) => r.data);
   });
 
