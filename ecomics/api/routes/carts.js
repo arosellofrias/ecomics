@@ -2,17 +2,6 @@ const express = require("express");
 const router = express.Router();
 const {Cart,User, CartItem,Product} = require("../models")
 
-router.post("/",(req,res)=>{
-    User.findByPk(2)
-    .then(user=>{
-        console.log(user.id,"eeeeeeeee")
-        Cart.create({userId:user.id})
-            .then(data=>{
-        console.log("creado exitosamente")
-        res.send(data)
-    })
-    })
-})
 
 router.post("/add",(req,res)=>{
     let {cartId, productId,cantidad} = req.body
