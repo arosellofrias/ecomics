@@ -28,6 +28,7 @@ export default (props)=>{
             <p className={styles.details}>{singleComic.descripcion}</p>
             <h2 className={styles.h1}>Precio:<strong>{singleComic.precio}</strong></h2>
             <h2 className={styles.h1}>Disponibles: <strong>{singleComic.stock}</strong></h2>
+            <button className={styles.h1}>Agregar al carrito</button>
             </div>
             </>
             : <h1>Loading..</h1>}

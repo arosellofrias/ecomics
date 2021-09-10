@@ -78,11 +78,13 @@ router.post("/login", async (req, res) => {
       // user
       res.status(200).json(user);
     }
-    //res.status(400).send("Invalid Credentials");  //esto rompe jaja
+    else res.status(400).send("Invalid Credentials");  //esto rompe jaja
   } catch (err) {
     console.log(err);
   }
   // Our register logic ends here
 });
-
+router.get("/logout", (req,res,next)=>{
+  res.send({})
+})
 module.exports = router;

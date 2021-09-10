@@ -20,7 +20,7 @@ export default ()=>{
                 <Link to={`/comics/${singleComic.id}`}>
                 <h1 className={styles.h1}>{singleComic.nombre}</h1>
                 <img className={styles.img} src={singleComic.imagenUrl}/>
-                <button>+info</button>
+                <strong>${singleComic.precio}</strong>
                 </Link>
             </div>
         )) : comicsByTitle.map((singleComic) => (
@@ -28,7 +28,7 @@ export default ()=>{
                 <Link to={`/comics/${singleComic.id}`}>
                 <h1 className={styles.h1}>{singleComic.nombre}</h1>
                 <img  className={styles.img} src={singleComic.imagenUrl}/>
-                <button  >+info</button>
+                <strong  >${singleComic.precio}</strong>
                 </Link>
 
             </div>

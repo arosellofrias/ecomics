@@ -16,6 +16,8 @@ export default ()=>{
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getComicsByTitle(comic));
+    setComic("")
+    
   };
 
   const comicsByTitle = useSelector((state) => state.comicsByTitle);
@@ -33,6 +35,7 @@ return(
           <input
             placeholder="Mandale un comic"
             onChange={(e) => handleChange(e)}
+            value={comic}
           ></input>
         </form>
         </div>
