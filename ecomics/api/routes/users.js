@@ -1,32 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const {User} = require("../models/index.js");
+const {User, Cart} = require("../models/index.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
-  // Our register logic starts here
+
   try {
-    // Get user input
     const { nombre, apellido, email, fechaDeNacimiento, direccion, password } = req.body;
 
-    // Validate user input
     if (!(nombre && apellido && email && fechaDeNacimiento && direccion && password)) {
       res.status(400).send("All input is required");
     }
 
-    // check if user already exist
-    // Validate if user exist in our database
     const oldUser = await User.findOne({ where: { email:email.toLowerCase() } });
 
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
     }
-
-    //Encrypt user password
     const encryptedPassword = await bcrypt.hash(password, 10);
-
-    // Create user in our database
     const user = await User.create({
       nombre:nombre,
       apellido:apellido,
@@ -34,7 +26,16 @@ router.post("/register", async (req, res) => {
       fechaDeNacimiento:fechaDeNacimiento,
       direccion:direccion,
       password: encryptedPassword,
-    });
+
+    })
+    const cart = await User.findByPk(user.id)
+                            .then(u=>{
+                              console.log(u)
+                                Cart.create({userId:u.id})
+                                    .then(()=>{
+                                res.end()
+                            })
+    })
 
     // Create token
     const token = jwt.sign({ user_id: user._id, email }, "asdasd", {
