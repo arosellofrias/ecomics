@@ -3,7 +3,7 @@ import logger from "redux-logger";
 
 import { comicsReducer, singleComicReducer, comicsByTitleReducer  } from "./comics"
 import registerReducer from "./userRegister";
-import loginReducer from "./userLogin"
+import userReducer from "./userLogin"
 
 
 
@@ -14,7 +14,7 @@ const store = configureStore({
       comicsByTitle: comicsByTitleReducer,
       singleComic: singleComicReducer,
       registerUser: registerReducer,
-      isLoggedIn: loginReducer
+      isLoggedIn: userReducer
     },
   });
   

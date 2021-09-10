@@ -6,6 +6,7 @@ import { getComicsRequest } from "./state/comics";
 import Comics from "./components/Comics";
 import SingleComic from "./components/SingleComic";
 import Search from "./components/Search"
+import Carrito from "./components/Carrito"
 
 import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
@@ -41,7 +42,8 @@ function App() {
         <Route path="/comics/:id" component={SingleComic} />
         <Route path="/login" component={LoginUser} />
         <Route path="/logout" component={Logout} />
-          <Route path ="/register" component={Register}/>
+        <Route path="/cart" component={Carrito}/>
+        <Route path ="/register" component={Register}/>
 
         <Redirect to="/comics" />
       </Switch>

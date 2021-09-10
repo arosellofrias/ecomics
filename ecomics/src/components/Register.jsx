@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { sendRegisterRequest } from "../state/userRegister";
 import "./compStyles/Login.css";
 
@@ -8,6 +8,7 @@ import "./compStyles/Login.css";
 export default () => {
   const dispatch = useDispatch();
   const registerUser = useSelector((state) => state.registerUser);
+  const history = useHistory()
 
   const [usr, setUsr] = React.useState({
     nombre: "",
@@ -18,37 +19,37 @@ export default () => {
     password: "",
   });
 
-  const { nombre, apellido, email,fechaDeNacimiento,direccion,token,privilegios, password } = usr;
+  const { nombre, apellido, email,fechaDeNacimiento,direccion, password } = usr;
 
   const handleChange = (e) => {
     e.preventDefault();
+    /* console.log() */
     const { name, value } = e.target;
     setUsr((usr) => ({ ...usr, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("USR",usr)
     dispatch(sendRegisterRequest(usr))
-      .then((data) => data)
-      .catch((err) => console.log(err));
+    history.push("/login")
   };
 
   return (
     <div className="login">
       <h2>Register</h2>
-      <form className="login_form" name="form" onSubmit={handleSubmit}>
-        <div className="form-group">
+      <form  name="form" onSubmit={handleSubmit}>
+        <div >
           <label>Nombre</label>
           <input
             type="text"
             name="nombre"
             value={nombre}
             onChange={handleChange}
-            className="form-control"
           ></input>
               </div>
               <br></br>
-        <div className="form-group">
+        <div >
           <label>Apellido</label>
           <input
             type="text"
@@ -59,7 +60,7 @@ export default () => {
           ></input>
               </div>
               <br></br>
-        <div className="form-group">
+        <div>
           <label>Email</label>
           <input
             type="email"
@@ -70,25 +71,25 @@ export default () => {
           ></input>
               </div>
               <br></br>
-              <div className="form-group">
+              <div >
           <label>Fecha de nacimiento</label>
           <input
             type="date"
             name="fechaDeNacimiento"
             value={fechaDeNacimiento}
             onChange={handleChange}
-            className="form-control"
+            
           ></input>
               </div>
               <br></br>
-              <div className="form-group">
+              <div >
           <label>Direccion</label>
           <input
             type="text"
             name="direccion"
             value={direccion}
             onChange={handleChange}
-            className="form-control"
+           
           ></input>
               </div>
               <br></br>
@@ -99,12 +100,12 @@ export default () => {
             name="password"
             value={password}
             onChange={handleChange}
-            className="form-control"
+            
           ></input>
               </div>
               <br></br>
-        <div className="form-group">
-          <button className="submit_btn"><Link to="/login">Register</Link></button>
+        <div >
+          <button type="submit">Register</button>
           {registerUser.salt ? (
             <p>{`te registraste bien ${registerUser.nombre}`}</p>
           ) : (

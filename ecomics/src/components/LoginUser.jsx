@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./compStyles/Login.css";
-import {sendLoginRequest} from "../state/userLogin"
+import {sendLoginRequest, sendLogoutRequest} from "../state/userLogin"
 
 const LoginUser = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const history = useHistory()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -17,11 +18,12 @@ const LoginUser = () => {
     console.log("BODY==>",body)
     e.preventDefault()
     dispatch(sendLoginRequest(body))
+    history.push("/comic")
   }
+  
   
   return (
     <div className="login">
-      {console.log("ISLOGGEDIN===>>>",isLoggedIn )}
         <h1>Logueate acá 🦸‍♂️</h1>
         
         
@@ -42,7 +44,7 @@ const LoginUser = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" className="submit_btn">
-          <Link to="/comics">Ingresar</Link>
+          Ingresar
         </button>
       </form>
     </div>

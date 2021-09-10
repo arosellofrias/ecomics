@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,6 +11,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import Search from "./Search";
 import Button from "@material-ui/core/Button";
+import { sendLogoutRequest} from "../state/userLogin"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,6 +72,16 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
+  //trampa mortal
+  const history = useHistory()
+  
+  const logoutSubmit = (e)=>{
+    e.preventDefault()
+    dispatch(sendLogoutRequest())
+    history.push("/comic")
+  }
+ 
 
   return (
     <div className={classes.root}>
@@ -81,23 +93,22 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
           >
-              {Object.keys(isLoggedIn).length ? <><Button variant="contained" color="secondary">
-              <Link to="/comic">Logout</Link>
-            </Button></> :<> <Button variant="contained" color="primary">
+              {Object.keys(isLoggedIn).length ? <><Button  onClick={logoutSubmit} variant="contained" color="secondary">
+              <Link to="/login">Logout</Link>
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              href="#contained-buttons"
+            >
+              <Link to="/cart">Carrito</Link>
+            </Button>
+            </> :<> <Button variant="contained" color="primary">
               <Link to="/login">Login</Link>
             </Button>
             <Button variant="contained" color="secondary">
               <Link to="/register">register</Link>
             </Button> </> } 
-           {/*  <Button variant="contained" color="primary">
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button variant="contained" color="secondary">
-              <Link to="/register">register</Link>
-            </Button> */}
-            {/* <Button variant="contained" color="secondary">
-              <Link to="/comic">Logout</Link>
-            </Button> */}
             <Button
               variant="contained"
               color="primary"
