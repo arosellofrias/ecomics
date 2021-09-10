@@ -21,7 +21,7 @@ User.init({
         }
     },
     fechaDeNacimiento : {
-        type: S.DATE,
+        type: S.DATEONLY,
         allowNull: false
     },
     direccion: {
