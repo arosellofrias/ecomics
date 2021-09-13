@@ -30,3 +30,15 @@ export const getComicsRequest = createAsyncThunk("COMICS", async() => {
   export const singleComicReducer = createReducer([],{
     [singleComicRequest.fulfilled]: (state,action)=>action.payload
   })
+
+  export const deleteComicRequest= createAsyncThunk("DELETECOMIC", async (id) =>{
+
+    return await(
+       axios.delete(`http://localhost:3001/api/product/${id}`).then((r) => r)
+
+    )
+  })
+
+  export const deleteComicReducer = createReducer([],{
+    [deleteComicRequest.fulfilled]: (state,action)=>action.payload
+  })

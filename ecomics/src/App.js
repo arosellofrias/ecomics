@@ -13,6 +13,7 @@ import { Logout } from "./components/Logout";
 
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
+import AdminPage from "./components/AdminPage";
 
 
 function App() {
@@ -45,7 +46,8 @@ function App() {
         <Route path="/login" component={LoginUser} />
         <Route path="/logout" component={Logout} />
         <Route path="/cart" component={Carrito}/>
-        <Route path ="/register" component={Register}/>
+        <Route path="/register" component={Register} />
+        <Route path ="/admin" component={AdminPage}/>
 
         <Redirect to="/comics" />
       </Switch>
