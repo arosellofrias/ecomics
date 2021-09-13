@@ -19,16 +19,21 @@ router.post("/",(req,res)=>{
 })
 
 
-router.post("/add",(req,res)=>{
-    let {cartId, productId,cantidad} = req.body
+router.post("/add/",(req,res)=>{
+    let {cartId, productId, cantidad} = req.body
+
     Cart.findByPk(cartId)
     .then(carrito=>{
         Product.findByPk(productId)
         .then(prod=>{
-            CartItem.create({
-                cantidad:cantidad,
+            CartItem.findOrCreate({
+                where:{
+                    productId : prod.id
+                },
+                defaults : {cantidad:cantidad,
                 cartId:carrito.id,
                 productId: prod.id
+                }
             }).then((data)=>{
                 res.send(data)
             })
