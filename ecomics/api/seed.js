@@ -1,4 +1,6 @@
 const prods = require("./productos.json")
+const users = require("./usuarios.json")
+const axios = require("axios")
 
 const {Cart, CartItem, Order, OrderItem, Product, User, Category} = require("./models")
 
@@ -36,6 +38,20 @@ function seedProd  (){
     })  
 }
 
+function seedUsers(){
+    let contador = 0
+    users.map(user=>
+        {
+        axios.post("http://localhost:3001/api/user/register", user)
+            .then((r) =>{
+                contador+=1
+                console.log(`Usuario registrado (${contador})${user.privilegios?'admin':'.'}` )
+                r.data
+            })
+            .catch(e=>e)
+        })
+}
+
 async function seedearTODO(){
     const promesa = await seedCategories(categorias)
     return await Promise.all(promesa)
@@ -43,6 +59,10 @@ async function seedearTODO(){
 }
 
 
-seedearTODO().then(()=>seedProd())
+seedearTODO().then(()=>{
+
+    seedProd()
+    seedUsers()
+})
             .catch(e=>console.log(e))
 
