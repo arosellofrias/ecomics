@@ -3,15 +3,19 @@ import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 export const sendLoginRequest = createAsyncThunk("LOGIN", (obj) => {
     return axios.post("http://localhost:3001/api/user/login", obj)
-    .then((r) => r.data)
-    
+    .then((r) => { 
+      localStorage.setItem('token',r.data.token)
+      return r.data
+    })
     .catch(e=>prompt(e));
   });
 
 export const sendLogoutRequest = createAsyncThunk("LOGOUT", () => {
     return axios.get("http://localhost:3001/api/user/logout")
-    .then((r) => r.data)
-    
+    .then((r) => { 
+      localStorage.removeItem('token')
+      return r.data
+    })
     .catch(e=>prompt(e));
   });
 
