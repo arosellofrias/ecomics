@@ -13,8 +13,8 @@ router.post("/add",(req,res)=>{
                 cantidad:cantidad,
                 cartId:carrito.id,
                 productId: prod.id
-            }).then(()=>{
-                res.send()
+            }).then((data)=>{
+                res.send(data)
             })
         })
     })
