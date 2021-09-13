@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   /* const [comic, setComic] = React.useState("");
 
   const handleChange = (e) => {
@@ -36,6 +37,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
+      {console.log("ISLOGGEDIN===>", isLoggedIn )}
       <Switch>
         {/* <Route path="/search" component={Search}/> */}
         <Route exact path="/comics" component={Comics} />

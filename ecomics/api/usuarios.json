@@ -1,0 +1,69 @@
+[{
+    "nombre":"admin",
+    "apellido":"admin",
+    "email":"admin@admin.com",
+    "fechaDeNacimiento":"01/01/2000",
+    "direccion":"admin 1",
+    "password":"admin",
+    "privilegios":true
+
+},
+{
+    "nombre":"Nazareno",
+    "apellido":"Covian",
+    "email":"naza@gmail.com",
+    "fechaDeNacimiento":"01/04/1991",
+    "direccion":"arenales 4560",
+    "password":"nazareno",
+    "privilegios":false
+
+},
+{
+    "nombre":"Augusto",
+    "apellido":"Rosello",
+    "email":"augusto@gmail.com",
+    "fechaDeNacimiento":"12/12/1997",
+    "direccion":"ayacucho 3808",
+    "password":"augusto",
+    "privilegios":false
+
+},
+{
+    "nombre":"Mariano",
+    "apellido":"Cowflower",
+    "email":"kbza@gmail.com",
+    "fechaDeNacimiento":"10/10/1990",
+    "direccion":"una",
+    "password":"mariano",
+    "privilegios":false
+
+},
+{
+    "nombre":"Pablo",
+    "apellido":"Burgos",
+    "email":"pablin@hotmail.com",
+    "fechaDeNacimiento":"01/01/1992",
+    "direccion":"una",
+    "password":"pablo",
+    "privilegios":false
+
+},
+{
+    "nombre":"Ezequiel",
+    "apellido":"Valeriano",
+    "email":"echy@yahoo.com.ar",
+    "fechaDeNacimiento":"01/02/1989",
+    "direccion":"una",
+    "password":"ezequiel",
+    "privilegios":false
+
+},
+{
+    "nombre":"Lautaro",
+    "apellido":"Manfio",
+    "email":"laucha@uolsinectis.com.ar",
+    "fechaDeNacimiento":"02/06/1994",
+    "direccion":"una",
+    "password":"lautaro",
+    "privilegios":false
+}]
