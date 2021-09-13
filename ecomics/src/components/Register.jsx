@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { sendRegisterRequest } from "../state/userRegister";
 import "./compStyles/Login.css";
 
-
 export default () => {
   const dispatch = useDispatch();
   const registerUser = useSelector((state) => state.registerUser);
@@ -18,7 +17,8 @@ export default () => {
     password: "",
   });
 
-  const { nombre, apellido, email,fechaDeNacimiento,direccion,token,privilegios, password } = usr;
+  const { nombre, apellido, email, fechaDeNacimiento, direccion, password } =
+    usr;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -28,90 +28,90 @@ export default () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendRegisterRequest(usr))
-      .then((data) => data)
-      .catch((err) => console.log(err));
+    dispatch(sendRegisterRequest(usr));
   };
 
   return (
     <div className="login">
       <h2>Register</h2>
-      <form className="login_form" name="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Nombre</label>
-          <input
-            type="text"
-            name="nombre"
-            value={nombre}
-            onChange={handleChange}
-            className="form-control"
-          ></input>
-              </div>
-              <br></br>
-        <div className="form-group">
-          <label>Apellido</label>
-          <input
-            type="text"
-            name="apellido"
-            value={apellido}
-            onChange={handleChange}
-            className="form-control"
-          ></input>
-              </div>
-              <br></br>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            className="form-control"
-          ></input>
-              </div>
-              <br></br>
-              <div className="form-group">
-          <label>Fecha de nacimiento</label>
-          <input
-            type="date"
-            name="fechaDeNacimiento"
-            value={fechaDeNacimiento}
-            onChange={handleChange}
-            className="form-control"
-          ></input>
-              </div>
-              <br></br>
-              <div className="form-group">
-          <label>Direccion</label>
-          <input
-            type="text"
-            name="direccion"
-            value={direccion}
-            onChange={handleChange}
-            className="form-control"
-          ></input>
-              </div>
-              <br></br>
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-            className="form-control"
-          ></input>
-              </div>
-              <br></br>
-        <div className="form-group">
-          <button className="submit_btn"><Link to="/login">Register</Link></button>
-          {registerUser.salt ? (
-            <p>{`te registraste bien ${registerUser.nombre}`}</p>
-          ) : (
-            ""
-          )}
-        </div>
-        {registerUser.token?<h3>Te registraste bien {registerUser.nombre} </h3>:""}
+      <form
+        className="login_form"
+        name="form"
+        onSubmit={(e) => handleSubmit(e)}
+      >
+        <input
+          aria-label="required"
+          placeholder="Nombre"
+          type="text"
+          name="nombre"
+          value={nombre}
+          onChange={handleChange}
+          className="form-control"
+        ></input>
+        <br></br>
+        <input
+          aria-label="required"
+          placeholder="Apellido"
+          type="text"
+          name="apellido"
+          value={apellido}
+          onChange={handleChange}
+          className="form-control"
+        ></input>
+        <br></br>
+        <input
+          aria-label="required"
+          placeholder="Email"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+          className="form-control"
+        ></input>
+        <br></br>
+        <input
+          aria-label="required"
+          placeholder="Fecha de nacimiento"
+          type="date"
+          name="fechaDeNacimiento"
+          value={fechaDeNacimiento}
+          onChange={handleChange}
+          className="form-control"
+        ></input>
+        <br></br>
+        <input
+          aria-label="required"
+          placeholder="Direccion"
+          type="text"
+          name="direccion"
+          value={direccion}
+          onChange={handleChange}
+          className="form-control"
+        ></input>
+        <br></br>
+        <input
+          aria-label="required"
+          placeholder="Password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+          className="form-control"
+        ></input>
+        <br></br>
+        <button type="submit" className="submit_btn">
+          Register
+        </button>
+        {registerUser.salt ? (
+          <p>{`te registraste bien ${registerUser.nombre}`}</p>
+        ) : (
+          ""
+        )}
+        {registerUser.token ? (
+          <h3>Te registraste bien {registerUser.nombre} </h3>
+        ) : (
+          ""
+        )}
       </form>
     </div>
   );

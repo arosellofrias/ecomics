@@ -10,12 +10,14 @@ export default ()=>{
 
   const handleChange = (e) => {
     e.preventDefault();
-    setComic(e.target.value);
+    setComic(e.target.value)
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getComicsByTitle(comic));
+
   };
 
   const comicsByTitle = useSelector((state) => state.comicsByTitle);
