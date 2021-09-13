@@ -8,7 +8,8 @@ const routes = require("./routes")
 const cors = require('cors')
 
 
-const {Cart, CartItem, Order, OrderItem, Product, User} = require("./models")
+const {Cart, CartItem, Order, OrderItem, Product, User} = require("./models");
+const { TrendingUpTwoTone } = require("@material-ui/icons");
 
 // logging middleware
 app.use(volleyball);
