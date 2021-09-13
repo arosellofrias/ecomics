@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+
 // const db = new Sequelize('ecomics', "postgres", "lalalala.", {
 //   logging: false,
 //   host: 'localhost',
@@ -9,5 +10,6 @@ const db = new Sequelize('ecomics', null, null, {
     host: 'localhost',
     dialect: 'postgres'
   });
+
 
 module.exports = db

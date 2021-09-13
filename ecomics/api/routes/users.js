@@ -1,41 +1,64 @@
 const express = require("express");
 const router = express.Router();
-const {User, Cart} = require("../models/index.js");
+const { User, Cart } = require("../models/index.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+
+function validateEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
 router.post("/register", async (req, res) => {
-
   try {
-    const { nombre, apellido, email, fechaDeNacimiento, direccion, password } = req.body;
+    const { nombre, apellido, email, fechaDeNacimiento, direccion, password, privilegios } =
+      req.body;
 
-    if (!(nombre && apellido && email && fechaDeNacimiento && direccion && password)) {
-      res.status(400).send("All input is required");
+    if (
+      !(
+        nombre &&
+        apellido &&
+        email &&
+        fechaDeNacimiento &&
+        direccion &&
+        password
+      )
+    ) {
+      res.status(400).send("Por favor, ingrese todos los datos requeridos.");
     }
 
-    const oldUser = await User.findOne({ where: { email:email.toLowerCase() } });
+    if (!validateEmail(email))
+      res.status(400).send("Por favor, ingrese un email válido.");
+
+    const oldUser = await User.findOne({
+      where: { email: email.toLowerCase() },
+    });
 
     if (oldUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.status(409).send("El email ya se encuentra en uso.");
     }
+
+    // CHECKEAR EL SALT ! . ES SIEMPRE EL MISMO !!!
+
     const encryptedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
-      nombre:nombre,
-      apellido:apellido,
-      email: email.toLowerCase(), // sanitize: convert email to lowercase
-      fechaDeNacimiento:fechaDeNacimiento,
-      direccion:direccion,
+      nombre: nombre,
+      apellido: apellido,
+      email: email.toLowerCase(),
+      fechaDeNacimiento: fechaDeNacimiento,
+      direccion: direccion,
       password: encryptedPassword,
+      privilegios: privilegios
+    });
 
-    })
-    const cart = await User.findByPk(user.id)
-                            .then(u=>{
-                              console.log(u)
-                                Cart.create({userId:u.id})
-                                    .then(()=>{
-                                res.end()
-                            })
-    })
+    const cart = await User.findByPk(user.id).then((u) => {
+      console.log(u);
+      Cart.create({ userId: u.id }).then(() => {
+        res.end();
+      });
+    });
 
     // Create token
     const token = jwt.sign({ user_id: user._id, email }, "asdasd", {
@@ -51,21 +74,19 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  // Our register logic ends here
 });
 
 router.post("/login", async (req, res) => {
-  // Our login logic starts here
+
   try {
-    // Get user input
     const { email, password } = req.body;
 
-    // Validate user input
+    
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      res.status(400).send("Ingrese email y contraseña válidos");
     }
-    // Validate if user exist in our database
-    const user = await User.findOne({ where: { email:email.toLowerCase() } });
+
+    const user = await User.findOne({ where: { email: email.toLowerCase() } });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
@@ -78,14 +99,13 @@ router.post("/login", async (req, res) => {
 
       // user
       res.status(200).json(user);
-    }
-    else res.status(400).send("Invalid Credentials");  //esto rompe jaja
+    } else res.status(400).send("Email o contraseña incorrectos."); //esto rompe jaja
   } catch (err) {
     console.log(err);
   }
-  // Our register logic ends here
+
 });
-router.get("/logout", (req,res,next)=>{
-  res.send({})
-})
+router.get("/logout", (req, res, next) => {
+  res.send({});
+});
 module.exports = router;
