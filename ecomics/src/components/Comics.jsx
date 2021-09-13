@@ -6,9 +6,6 @@ import styles from "./compStyles/comics.module.css"
 
 
 export default ()=>{
-    /* React.useEffect(()=>{
-        dispatch(getComicsRequest(),[])
-      }) */
     const comics = useSelector((state) => state.comics);
     const isLoggedIn = useSelector((state) => state.isLoggedIn);
     const comicsByTitle = useSelector((state) => state.comicsByTitle);
@@ -33,18 +30,6 @@ export default ()=>{
 
             </div>
         ))}
-        {/* {comics.map((singleComic) => (
-            <div id={singleComic.id}>
-                <Link to={`/comics/${singleComic.id}`}>
-             
-                <h1>{singleComic.nombre}</h1>
-                <img className="img" src={singleComic.imagenUrl}/>
-                <button>+info </button>
-                </Link>
-
-            </div>
-        ))} */}
-        
         
         </div>
     )
