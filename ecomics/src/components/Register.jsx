@@ -12,12 +12,11 @@ export default () => {
     nombre: "",
     apellido: "",
     email: "",
-    fechaDeNacimiento: "",
     direccion: "",
     password: "",
   });
 
-  const { nombre, apellido, email, fechaDeNacimiento, direccion, password } =
+  const { nombre, apellido, email, direccion, password } =
     usr;
 
   const handleChange = (e) => {
@@ -65,16 +64,6 @@ export default () => {
           type="email"
           name="email"
           value={email}
-          onChange={handleChange}
-          className="form-control"
-        ></input>
-        <br></br>
-        <input
-          aria-label="required"
-          placeholder="Fecha de nacimiento"
-          type="date"
-          name="fechaDeNacimiento"
-          value={fechaDeNacimiento}
           onChange={handleChange}
           className="form-control"
         ></input>
