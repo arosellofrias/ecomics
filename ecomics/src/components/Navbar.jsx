@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const token=localStorage.getItem('token')
   const dispatch = useDispatch();
   //trampa mortal
   const history = useHistory()
@@ -93,7 +94,7 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
           >
-              {Object.keys(isLoggedIn).length ? <><Button  onClick={logoutSubmit} variant="contained" color="secondary">
+              {token ? <><Button  onClick={logoutSubmit} variant="contained" color="secondary">
               <Link to="/login">Logout</Link>
             </Button>
             <Button
