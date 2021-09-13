@@ -14,6 +14,7 @@ import { Logout } from "./components/Logout";
 
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
+import AdminPage from "./components/AdminPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,10 +45,13 @@ function App() {
         <Route path="/comics/:id" component={SingleComic} />
         <Route path="/login" component={LoginUser} />
         <Route path="/logout" component={Logout} />
+
         <Route path="/cart" component={Carrito} />
         <Route path="/register" component={Register} />
+         <Route path ="/admin" component={AdminPage}/>
         <Route path="/category/mangas" component={MangasFilter} />
         <Route path="/category/comics" component={ComicsFilter} />
+
         <Redirect to="/comics" />
       </Switch>
     </div>
