@@ -81,4 +81,16 @@ router.delete("/",(req,res)=>{
 .catch(e=>e)
 })
 
+router.delete("/checkout", (req, res) => {
+    let {cartId} = req.body
+    Cart.findByPk(cartId)
+    .then(cart => {
+        CartItem.destroy(
+            {where:{
+                cartId : cartId
+            }})
+    }).then(data => res.json(data))
+}
+)
+
 module.exports = router;
