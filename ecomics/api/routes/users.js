@@ -13,7 +13,7 @@ function validateEmail(email) {
 
 router.post("/register", async (req, res) => {
   try {
-    const { nombre, apellido, email, fechaDeNacimiento, direccion, password, privilegios } =
+    const { nombre, apellido, email, direccion, password, privilegios } =
       req.body;
 
     if (
@@ -21,7 +21,6 @@ router.post("/register", async (req, res) => {
         nombre &&
         apellido &&
         email &&
-        fechaDeNacimiento &&
         direccion &&
         password
       )
@@ -47,7 +46,6 @@ router.post("/register", async (req, res) => {
       nombre: nombre,
       apellido: apellido,
       email: email.toLowerCase(),
-      fechaDeNacimiento: fechaDeNacimiento,
       direccion: direccion,
       password: encryptedPassword,
       privilegios: privilegios
@@ -108,4 +106,31 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res, next) => {
   res.send({});
 });
+
+
+router.put("/:id", async (req, res, next) =>{
+  const id = req.params.id
+  let {password} = req.body
+
+  if(password){
+    password = await bcrypt.hash(password, 10)
+    
+    User.update({password : password},
+      {where: {id: id},
+      returning: true,
+      plain: true
+  }).then(data =>{
+    return res.json(data[1])
+  })
+  }else{
+    User.update(req.body,
+      {where: {id: id},
+      returning: true,
+      plain: true
+  }).then(data =>{
+    res.json(data[1])
+  })
+  }
+})
+
 module.exports = router;

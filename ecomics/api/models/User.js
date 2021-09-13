@@ -20,10 +20,6 @@ User.init({
             isEmail: true,
         }
     },
-    fechaDeNacimiento : {
-        type: S.DATEONLY,
-        allowNull: false
-    },
     direccion: {
         type: S.STRING,
         allowNull: false
