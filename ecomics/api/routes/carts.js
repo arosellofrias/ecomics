@@ -3,6 +3,22 @@ const router = express.Router();
 const {Cart,User, CartItem,Product} = require("../models")
 
 
+
+router.post("/",(req,res)=>{
+    let id = req.body.cartId
+    CartItem.findAll(
+        {
+            where: {
+              cartId:id
+            }
+        }
+    ).then(data=>{
+        console.log(data)
+        res.send(data)
+    })
+})
+
+
 router.post("/add",(req,res)=>{
     let {cartId, productId,cantidad} = req.body
     Cart.findByPk(cartId)
@@ -19,6 +35,7 @@ router.post("/add",(req,res)=>{
         })
     })
 })
+
 
 router.put("/",(req,res)=>{
     let {cartId, productId,cantidad} = req.body
