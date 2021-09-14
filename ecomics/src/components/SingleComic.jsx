@@ -14,10 +14,10 @@ export default (props)=>{
     console.log("PROPS",props)
     const params = useParams()
     const paramsId = params.id
-    const [counter,setCounter] = useState(0) 
+    const [counter,setCounter] = useState(1) 
 
     const descreaseCounter = ()=>{
-       if(counter>0){setCounter(counter -1)}
+       if(counter>1){setCounter(counter -1)}
           
       
     }

@@ -27,6 +27,20 @@ export default () => {
       .then(() => setCarritoProductos(array));
   }, []);
 
+    const deleteComicCarrito = (productId)=>{
+      console.log("CARTID==>",valores[0].cartId)
+      console.log("PRODUCTID==>",productId)
+      if(productId !== undefined){
+        return axios.delete("http://localhost:3001/api/cart",{
+        cartId:valores[0].cartId,
+        productId:productId
+      })
+    .then(data=>data)}
+  }  
+
+
+//carrito comics va a quedar solo con los comics que tengan un id que se encuentre dentro de carritoProductos(arreglo de numeros)
+
   let carritoComics = comics.filter((comic) =>
     carritoProductos.includes(comic.id)
   );
@@ -49,18 +63,24 @@ export default () => {
       }
     });
   }
+
+  //[30,30,40,50,55,65].reduce(add,0)
+
   const totalTotal = final.reduce(add, 0);
 
   return (
     <div>
+      {console.log("valoress=>>>", valores)}
       <div className={styles.comics}>
         {carritoComics.map((singleCarritoComic, index) => (
           <div key={singleCarritoComic.id} className={styles.singleComic}>
+            {console.log("SINGLEcARRITO==>", singleCarritoComic)}
             <h1 className={styles.h1}>{singleCarritoComic.nombre}</h1>
             <img className={styles.img} src={singleCarritoComic.imagenUrl} />
+            <button onClick={()=>deleteComicCarrito(singleCarritoComic.id)} >eliminar del carrito</button>
             <p>
               Precio por artículo:
-              {singleCarritoComic.precio * solucion[index].cantidad}
+              {final[index]}
             </p>
           </div>
         ))}
