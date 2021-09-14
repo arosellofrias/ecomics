@@ -22,7 +22,7 @@ export default () => {
           <h1 className={styles.h1}>{comic.nombre}</h1>
           <img className={styles.img} src={comic.imagenUrl} />
           <div className={styles.btns}>
-            <Link to="/edit">
+            <Link to={`/edit/${comic.id}`}>
               <button className={styles.btn}>Editar</button>
             </Link>
               <button className={styles.btn} onClick={(e)=>handleSubmit(e,comic.id)}>Eliminar</button>
