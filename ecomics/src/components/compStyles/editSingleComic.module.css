@@ -15,7 +15,7 @@
   }
 
 .details{
-    font-size: 22px;
+    font-size: 11px;
     text-align: justify;
     font-family: "Helvetica Neue";
 }  
@@ -25,10 +25,10 @@
     margin: 30px;
 }
 .h1{
-    font-size: 25px;
-    height: 55px;
+    font-size: 12px;
+    height: 27px;
     letter-spacing: 1px;
     font-family: "Helvetica Neue";
-    width: 300px;
+    width: 150px;
     text-align: left;
 }
