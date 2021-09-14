@@ -52,7 +52,7 @@ function App() {
          <Route path ="/admin" component={AdminPage}/>
         <Route path="/category/mangas" component={MangasFilter} />
         <Route path="/category/comics" component={ComicsFilter} />
-        <Route path ="/edit:id" component={AdminEdit}/>
+        <Route path ="/edit/:id" component={AdminEdit}/>
 
         <Redirect to="/comics" />
       </Switch>
