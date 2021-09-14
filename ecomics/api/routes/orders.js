@@ -4,12 +4,30 @@ const {Order,OrderItem,Product,Cart, CartItem}=require("../models")
 
 
 router.get("/",(req,res)=>{
-    Order.findAll()
+    let {userId,orderId} = req.body
+    if(userId)
+    {Order.findAll({//Trae todas las ordenes de un userId
+        where: {
+          userId:userId
+        }
+    })
     .then(data=>res.json(data))
-    .catch(e=>e)
+    .catch(e=>e)}
+    else {
+        OrderItem.findAll({//Trae detalles de una orderId
+                    where: {
+                      orderId:orderId
+                    }
+                })
+                .then(data=>res.json(data))
+                .catch(e=>e)
+    }
 })
 
-router.post("/",(req,res)=>{//ESTO NO ESTA TERMINADO
+
+
+
+router.post("/",(req,res)=>{//Primero esta, desp checkout
     let {cartId,userId,formaDePago,fecha}=req.body
     Order.create({
         userId:userId,
@@ -17,24 +35,20 @@ router.post("/",(req,res)=>{//ESTO NO ESTA TERMINADO
         fecha:fecha
     })
     .then((orderData)=>{
-        console.log(orderData,"order creada")
         CartItem.findAll(
             {where:{cartId:cartId}}
         )
         .then(cartData=>{
-            console.log(cartData,"...........RESPUESTAAA...............")
-            
-                // OrderItem.create({
-                //     orderId:orderData.id,
-                //     productId:cartData[0].productId,
-                //     cantidad:cartData[0].cantidad
-                // }).then(t=>{
-                //     console.log("termino perfecto")
-                //     res.send(t)
-                // })
-                res.send(cartData)
+                cartData.map(cart =>{
+                    OrderItem.create({
+                        orderId:orderData.id,
+                        productId:cart.productId,
+                        cantidad:cart.cantidad
+                    }).then(t=>{
+                        res.send(t)
+                    })
+                })
         })
-        
     })
     .catch(e=>e)
 })
