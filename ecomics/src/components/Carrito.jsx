@@ -70,8 +70,14 @@ export default () => {
 
   return (
     <div>
-      {console.log("valoress=>>>", valores)}
+      {console.log("valoress=>>>", user)}
       <div className={styles.comics}>
+      <h3>PRECIO FINAL: {totalTotal}</h3>
+      <br></br>
+      <h3>DIRECCION:
+        <br></br>
+        {user.direccion}</h3>
+        <button className={styles.h1}>CHECKOUT</button>
         {carritoComics.map((singleCarritoComic, index) => (
           <div key={singleCarritoComic.id} className={styles.singleComic}>
             {console.log("SINGLEcARRITO==>", singleCarritoComic)}
@@ -85,7 +91,6 @@ export default () => {
           </div>
         ))}
       </div>
-      <h1>PRECIO FINAL: {totalTotal}</h1>
     </div>
   );
 };
