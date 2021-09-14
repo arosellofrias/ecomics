@@ -5,7 +5,7 @@ class Order extends S.Model{}
 
 Order.init({
     fecha: {
-        type: S.DATE,
+        type: S.DATEONLY,
         allowNull: false
     },
     formaDePago: {
