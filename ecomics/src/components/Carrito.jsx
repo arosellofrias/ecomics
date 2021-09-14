@@ -27,16 +27,12 @@ export default () => {
       .then(() => setCarritoProductos(array));
   }, []);
 
-    const deleteComicCarrito = (productId)=>{
-      console.log("CARTID==>",valores[0].cartId)
-      console.log("PRODUCTID==>",productId)
-      if(productId !== undefined){
-        return axios.delete("http://localhost:3001/api/cart",{
-        cartId:valores[0].cartId,
-        productId:productId
-      })
-    .then(data=>console.log("sjnsjnsjsn",data))}
-  }  
+  const deleteComicCarrito = (productId)=>{
+    if(productId !== undefined)
+      axios.delete("http://localhost:3001/api/cart",{data:{
+      cartId:valores[0].cartId,
+      productId:productId}}).then(data=>console.log("se Borro el producto==>",data))
+}  
 
 
 //carrito comics va a quedar solo con los comics que tengan un id que se encuentre dentro de carritoProductos(arreglo de numeros)

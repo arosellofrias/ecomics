@@ -67,9 +67,8 @@ router.put("/",(req,res)=>{
 
 router.delete("/",(req,res)=>{
     let {cartId, productId} = req.body
-    Cart.findOne({where:{id:cartId}})
+    Cart.findByPk(cartId)
     .then(carrito=>{
-        console.log("CARRITObACK==>>>>>>>>>>>>>>>>>>>>", carrito)
         Product.findByPk(productId)
         .then(prod=>{
             CartItem.destroy(
