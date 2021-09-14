@@ -35,7 +35,7 @@ export default () => {
         cartId:valores[0].cartId,
         productId:productId
       })
-    .then(data=>data)}
+    .then(data=>console.log("sjnsjnsjsn",data))}
   }  
 
 

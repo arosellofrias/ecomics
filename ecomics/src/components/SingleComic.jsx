@@ -21,11 +21,8 @@ export default (props)=>{
           
       
     }
-    const increaseCounter = ()=>{
-        if(counter< singleComic.stock){setCounter(counter +1)}
-
-    }
-  };
+    
+  ;
   const increaseCounter = () => {
     if (counter < singleComic.stock) {
       setCounter(counter + 1);
@@ -80,5 +77,5 @@ export default (props)=>{
         <h1>Loading..</h1>
       )}
     </div>
-  );
-};
+  )
+}
