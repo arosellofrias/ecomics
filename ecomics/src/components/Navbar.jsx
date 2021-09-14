@@ -21,6 +21,8 @@ import MenuList from "@material-ui/core/MenuList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
     display: "flex",
     flexGrow: 1,
   },
@@ -28,9 +30,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(0),
+    paddingLeft: theme.spacing(18),
+   
   },
   title: {
+    justifyContent: "center",
     flexGrow: 1,
     display: "none",
     [theme.breakpoints.up("sm")]: {
@@ -38,17 +43,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   search: {
+    paddingRight: theme.spacing(8),
+    paddingBottom: theme.spacing(2),
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
+   
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: "auto",
+      width: "20%",
     },
   },
   searchIcon: {
@@ -64,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
+    paddingBottom: theme.spacing(3),
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -96,7 +101,7 @@ export default function SearchAppBar() {
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    history.push("/comic");
   };
 
   const handleClose = (event) => {

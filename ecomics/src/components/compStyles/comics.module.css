@@ -1,10 +1,11 @@
 .comics{
     display: grid;
     grid-template-columns: repeat(auto-fill,230px);
-    margin-left: 5px;
     justify-content: center;
-    gap: 60px;
-    padding: 40px;
+    gap: 90px;
+    padding: 60px;
+    font-family: "Franklin Gothic Medium";
+    font-size: 20px;
     
   }
 
@@ -14,29 +15,30 @@
   }
 
 .img{
-    height: 350px;
+    height: 420px;
     width: 280px;
     border-radius: 3px;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.4);
   }
 
 .img:hover{
+    transition-duration: 500ms;
     transform: scale(1.1);
-    opacity: 0.8;
+    opacity: 0.9;
+    box-shadow: 10px 10px 30px rgba(0,0,0,1);
 }  
 
 .h1{
     font-size: 25px;
     height: 55px;
     letter-spacing: 1px;
-    font-family: "Helvetica Neue";
+    font-family: "Franklin Gothic Medium";
 }
 
 .btns{
   display: flex;
   justify-content: space-between;
   padding: 1% 20% 1% 20%;
-
-
 }
 
 .btn{
