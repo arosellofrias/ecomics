@@ -7,16 +7,23 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "./compStyles/singleComic.module.css";
 
-export default (props) => {
-  const dispatch = useDispatch();
-  console.log("PROPS", props);
-  const params = useParams();
-  const paramsId = params.id;
-  const [counter, setCounter] = useState(0);
 
-  const descreaseCounter = () => {
-    if (counter > 0) {
-      setCounter(counter - 1);
+export default (props)=>{
+    
+    const dispatch = useDispatch();
+    console.log("PROPS",props)
+    const params = useParams()
+    const paramsId = params.id
+    const [counter,setCounter] = useState(1) 
+
+    const descreaseCounter = ()=>{
+       if(counter>1){setCounter(counter -1)}
+          
+      
+    }
+    const increaseCounter = ()=>{
+        if(counter< singleComic.stock){setCounter(counter +1)}
+
     }
   };
   const increaseCounter = () => {
