@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getComicsRequest } from "./state/comics";
 import Comics from "./components/Comics";
 import SingleComic from "./components/SingleComic";
-import Search from "./components/Search";
 import Carrito from "./components/Carrito";
 import MangasFilter from "./components/MangasFilter";
 import ComicsFilter from "./components/ComicsFilter";

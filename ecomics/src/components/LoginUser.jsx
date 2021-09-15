@@ -1,43 +1,46 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Swal from 'sweetalert2'
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import "./compStyles/Login.css";
-import {sendLoginRequest, sendLogoutRequest} from "../state/userLogin"
+import { sendLoginRequest } from "../state/userLogin";
 
 const LoginUser = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const history = useHistory()
+  const history = useHistory();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  /*  const [isLoggedIn, setIsLoggedIn ] = useState({})  */
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
- /*  const [isLoggedIn, setIsLoggedIn ] = useState({})  */
-  
-  const loginSubmit = (body,e)=>{
-    console.log("BODY==>",body)
-    e.preventDefault()
-    dispatch(sendLoginRequest(body))
+  const loginSubmit = (body, e) => {
+    console.log("BODY==>", body);
+    e.preventDefault();
+    dispatch(sendLoginRequest(body));
     Swal.fire({
       title: `Bienvenido`,
       text: `gracias por visitarnos nuevamente`,
       icon: "success",
-      timer: "2000"
-    })
-    history.push("/comic")
-  }
-  
-  
+      timer: "2000",
+    });
+    history.push("/comic");
+  };
+
   return (
     <div className="login">
-        <h1>Logueate acá 🦸‍♂️</h1>
-        
-        
-      <form className="login_form" onSubmit={(e)=>(loginSubmit({
-        email:email,
-        password: password
-      },e))}>
+      <h1>Logueate acá 🦸‍♂️</h1>
+
+      <form
+        className="login_form"
+        onSubmit={(e) =>
+          loginSubmit(
+            {
+              email: email,
+              password: password,
+            },
+            e
+          )
+        }
+      >
         <input
           type="email"
           placeholder="Email"

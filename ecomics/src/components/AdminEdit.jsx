@@ -9,7 +9,7 @@ import axios from "axios";
 import styles from "./compStyles/editSingleComic.module.css";
 import "./compStyles/editComic.css";
 
-export default () => {
+const AdminEdit = () => {
   const [edit, setEdit] = useState({});
   const dispatch = useDispatch();
   const params = useParams();
@@ -104,7 +104,11 @@ export default () => {
           <button>Modificar</button>
         </form>
       </div>
-      <img className={`${styles.img} ${styles.column}`} src={edit.imagenUrl} />
+      <img
+        className={`${styles.img} ${styles.column}`}
+        src={edit.imagenUrl}
+        alt={edit.nombre}
+      />
       <div className={styles.column}>
         <h1 className={styles.h1}>{edit.nombre}</h1>
         <p className={styles.details}>{edit.descripcion}</p>
@@ -118,3 +122,5 @@ export default () => {
     </div>
   );
 };
+
+export default AdminEdit;

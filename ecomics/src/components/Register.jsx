@@ -1,13 +1,11 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { sendRegisterRequest } from "../state/userRegister";
 import "./compStyles/Login.css";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
-export default () => {
+const Register = () => {
   const dispatch = useDispatch();
-  const registerUser = useSelector((state) => state.registerUser);
 
   const [usr, setUsr] = React.useState({
     nombre: "",
@@ -17,8 +15,7 @@ export default () => {
     password: "",
   });
 
-  const { nombre, apellido, email, direccion, password } =
-    usr;
+  const { nombre, apellido, email, direccion, password } = usr;
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -28,13 +25,14 @@ export default () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendRegisterRequest(usr)).then(res => {
+    dispatch(sendRegisterRequest(usr)).then((res) => {
       Swal.fire({
         title: `Te registraste correctamente`,
         text: `Registrado correctamente`,
         icon: "success",
-        timer: "2000"
-      })})
+        timer: "2000",
+      });
+    });
   };
 
   return (
@@ -102,3 +100,5 @@ export default () => {
     </div>
   );
 };
+
+export default Register;

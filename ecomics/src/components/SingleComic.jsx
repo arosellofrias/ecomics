@@ -1,29 +1,26 @@
 import * as React from "react";
-import Link, { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { singleComicRequest } from "../state/comics";
 import { useState } from "react";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import axios from "axios";
 import styles from "./compStyles/singleComic.module.css";
 
+const SingleComic = (props) => {
+  const dispatch = useDispatch();
+  console.log("PROPS", props);
+  const params = useParams();
+  const paramsId = params.id;
+  const [counter, setCounter] = useState(1);
 
-export default (props)=>{
-    
-    const dispatch = useDispatch();
-    console.log("PROPS",props)
-    const params = useParams()
-    const paramsId = params.id
-    const [counter,setCounter] = useState(1) 
-
-    const descreaseCounter = ()=>{
-       if(counter>1){setCounter(counter -1)}
-          
-      
+  const descreaseCounter = () => {
+    if (counter > 1) {
+      setCounter(counter - 1);
     }
-    
-  ;
+  };
+
   const increaseCounter = () => {
     if (counter < singleComic.stock) {
       setCounter(counter + 1);
@@ -41,8 +38,8 @@ export default (props)=>{
           title: `¡Agregaste ${res.data[0].cantidad}U!`,
           text: `${singleComic.nombre} a tu carrito`,
           icon: "success",
-          timer: "2000"
-        })
+          timer: "2000",
+        });
       })
       .catch((e) => {
         Swal.fire({
@@ -50,19 +47,16 @@ export default (props)=>{
           text: `intenta más tarde`,
           icon: "error",
           timer: "2000",
-          footer: `${e}`
-        })
+          footer: `${e}`,
+        });
       });
   };
-  
-
 
   useEffect(() => {
     dispatch(singleComicRequest(paramsId));
   }, [paramsId]);
   const singleComic = useSelector((state) => state.singleComic);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  
 
   /* 
   Swal.fire({
@@ -80,6 +74,7 @@ export default (props)=>{
           <img
             className={`${styles.img} ${styles.column}`}
             src={singleComic.imagenUrl}
+            alt={singleComic.nombre}
           />
           <div className={styles.column}>
             <h1 className={styles.h1}>{singleComic.nombre}</h1>
@@ -104,5 +99,7 @@ export default (props)=>{
         <h1>Loading..</h1>
       )}
     </div>
-  )
-}
+  );
+};
+
+export default SingleComic;
