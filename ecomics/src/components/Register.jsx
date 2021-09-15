@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { sendRegisterRequest } from "../state/userRegister";
 import "./compStyles/Login.css";
+import Swal from 'sweetalert2'
 
 export default () => {
   const dispatch = useDispatch();
@@ -27,7 +28,13 @@ export default () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendRegisterRequest(usr));
+    dispatch(sendRegisterRequest(usr)).then(res => {
+      Swal.fire({
+        title: `Te registraste correctamente`,
+        text: `Registrado correctamente`,
+        icon: "success",
+        timer: "2000"
+      })})
   };
 
   return (
@@ -91,16 +98,6 @@ export default () => {
         <button type="submit" className="submit_btn">
           Register
         </button>
-        {registerUser.salt ? (
-          <p>{`te registraste bien ${registerUser.nombre}`}</p>
-        ) : (
-          ""
-        )}
-        {registerUser.token ? (
-          <h3>Te registraste bien {registerUser.nombre} </h3>
-        ) : (
-          ""
-        )}
       </form>
     </div>
   );
