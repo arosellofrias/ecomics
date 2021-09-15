@@ -1,12 +1,14 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2'
 import axios from "axios";
 import styles from "./compStyles/comics.module.css";
 
 export default () => {
   const [carritoProductos, setCarritoProductos] = useState([]);
   const [valores, setValores] = useState([]);
+  const [borrados, setBorrados] = useState([])
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user.id;
@@ -25,13 +27,21 @@ export default () => {
         });
       })
       .then(() => setCarritoProductos(array));
-  }, []);
+  }, [borrados]);
 
   const deleteComicCarrito = (productId)=>{
     if(productId !== undefined)
       axios.delete("http://localhost:3001/api/cart",{data:{
       cartId:valores[0].cartId,
-      productId:productId}}).then(data=>console.log("se Borro el producto==>",data))
+      productId:productId}}
+      ).then(data=>{
+        Swal.fire({
+          title: `Quitaste el producto del carrito`,
+          text: `puedes elegir entre muchos más`,
+          icon: "info",
+          timer: "2000"
+        })
+        setBorrados(data)})
 }  
 
 

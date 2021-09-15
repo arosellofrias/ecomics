@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { singleComicRequest } from "../state/comics";
 import { useState } from "react";
+import Swal from 'sweetalert2'
 import axios from "axios";
 import styles from "./compStyles/singleComic.module.css";
 
@@ -35,15 +36,41 @@ export default (props)=>{
         productId: singleComic.id,
         cantidad: counter,
       })
-      .then((res) => res.data)
-      .catch((e) => console.log("ERRORSUBMIT", e));
+      .then((res) => {
+        Swal.fire({
+          title: `¡Agregaste ${res.data[0].cantidad}U!`,
+          text: `${singleComic.nombre} a tu carrito`,
+          icon: "success",
+          timer: "2000"
+        })
+      })
+      .catch((e) => {
+        Swal.fire({
+          title: `Algo no salió bien`,
+          text: `intenta más tarde`,
+          icon: "error",
+          timer: "2000",
+          footer: `${e}`
+        })
+      });
   };
+  
+
 
   useEffect(() => {
     dispatch(singleComicRequest(paramsId));
   }, [paramsId]);
   const singleComic = useSelector((state) => state.singleComic);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  
+
+  /* 
+  Swal.fire({
+    title: ¡Agregaste!,
+    text: `${res.data[0].cantidad} - ${singleComic.nombre} a tu carrito`
+    
+  })
+  */
 
   return (
     <div className={styles.container}>

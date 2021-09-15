@@ -4,45 +4,61 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { singleComicRequest } from "../state/comics";
 import { useState } from "react";
+import Swal from 'sweetalert2'
 import axios from "axios";
 import styles from "./compStyles/editSingleComic.module.css";
 import "./compStyles/editComic.css";
 
 export default (props) => {
+  const [edit, setEdit] = useState({})
   const dispatch = useDispatch();
-  console.log("PROPS", props);
   const params = useParams();
   const paramsId = params.id;
 
-  const singleComic = useSelector((state) => state.singleComic);
 
-  console.log("NOMBRE",singleComic.nombre)
-  const [edit, setEdit] = useState({
-    nombre: singleComic.nombre,
-    imagen: singleComic.nombre,
-    precio: singleComic.nombre,
-    stock: singleComic.nombre,
-    descripcion: singleComic.nombre,
-  });
+  const singleComic = useSelector((state) => state.singleComic);
+  useEffect(() => {
+    dispatch(singleComicRequest(paramsId)).then({})
+    setEdit(
+      { nombre: singleComic.nombre,
+       imagen: singleComic.imagenUrl,
+       precio: singleComic.precio,
+       stock: singleComic.stock,
+       descripcion: singleComic.descripcion,
+       formato: singleComic.formato,
+       imagenUrl: singleComic.imagenUrl,
+       paginas: singleComic.paginas
+     });
+    
+  }, []);
 
   const handleChange = (e) => {
-    console.log("QUELLEGA",e.target)
-    e.preventDefault();
     const { name, value } = e.target;
     setEdit((edit) => ({ ...edit, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("EDITANDO", edit);
+    axios.put(`http://localhost:3001/api/product/${singleComic.id}`,
+    {nombre : edit.nombre,
+      formato : edit.formato,
+      imagenUrl: edit.imagenUrl,
+      precio: edit.precio,
+      paginas: edit.paginas,
+      stock : edit.stock,
+      descripcion: edit.descripcion   
+    }).then(res => {
+      Swal.fire({
+        title: `Artículo modificado`,
+        text: `modificaste correctamente`,
+        icon: "success",
+        timer: "2000"
+      })
+      console.log("!!!!!!!!!!!",res.data)})
+    .catch(e => console.log(e));
   };
 
-  useEffect(() => {
-    dispatch(singleComicRequest(paramsId));
-  }, [paramsId]);
 
-  console.log("SINGLE_COMIC", singleComic);
-console.log("EDIT",edit)
   return (
     <div className={styles.container}>
       <div className="login">
@@ -63,8 +79,8 @@ console.log("EDIT",edit)
           <label>Descripcion</label>
           <textarea
             type="text"
-            name="titulo"
-            value={singleComic.descripcion}
+            name="descripcion"
+            value={edit.descripcion}
             onChange={handleChange}
             className="form-control"
             rows="10"
@@ -72,19 +88,20 @@ console.log("EDIT",edit)
           <label>Precio</label>
           <input
             type="text"
-            name="titulo"
-            value={singleComic.precio}
+            name="precio"
+            value={edit.precio}
             onChange={handleChange}
             className="form-control"
           ></input>
           <label>Disponible</label>
           <input
             type="text"
-            name="titulo"
-            value={singleComic.stock}
+            name="stock"
+            value={edit.stock}
             onChange={handleChange}
             className="form-control"
           ></input>
+          <button>Modificar</button>
         </form>
       </div>
       <img
@@ -92,13 +109,13 @@ console.log("EDIT",edit)
         src={singleComic.imagenUrl}
       />
       <div className={styles.column}>
-        <h1 className={styles.h1}>{singleComic.nombre}</h1>
-        <p className={styles.details}>{singleComic.descripcion}</p>
+        <h1 className={styles.h1}>{edit.nombre}</h1>
+        <p className={styles.details}>{edit.descripcion}</p>
         <h2 className={styles.h1}>
-          Precio:<strong>{singleComic.precio}</strong>
+          Precio:<strong>{edit.precio}</strong>
         </h2>
         <h2 className={styles.h1}>
-          Disponibles: <strong>{singleComic.stock}</strong>
+          Disponibles: <strong>{edit.stock}</strong>
         </h2>
       </div>
     </div>

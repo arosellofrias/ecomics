@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2'
 import "./compStyles/Login.css";
 import {sendLoginRequest, sendLogoutRequest} from "../state/userLogin"
 
@@ -18,6 +19,12 @@ const LoginUser = () => {
     console.log("BODY==>",body)
     e.preventDefault()
     dispatch(sendLoginRequest(body))
+    Swal.fire({
+      title: `Bienvenido`,
+      text: `gracias por visitarnos nuevamente`,
+      icon: "success",
+      timer: "2000"
+    })
     history.push("/comic")
   }
   
