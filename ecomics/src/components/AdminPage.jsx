@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComicRequest,getComicsRequest} from "../state/comics";
 import styles from "./compStyles/comics.module.css";
+import Swal from 'sweetalert2'
 
 export default () => {
     const comics = useSelector((state) => state.comics);
@@ -10,7 +11,13 @@ export default () => {
 
     const handleSubmit = (e, id) => {
         e.preventDefault();
-        dispatch(deleteComicRequest(id)).then((data)=>dispatch(getComicsRequest()))
+        dispatch(deleteComicRequest(id)).then((data)=>dispatch(getComicsRequest())).then(res => {
+          Swal.fire({
+            title: `Artículo eliminado`,
+            text: `eliminaste correctamente`,
+            icon: "success",
+            timer: "2000"
+          })})
         
     }
     
