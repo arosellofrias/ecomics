@@ -18,11 +18,12 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
+import Swal from 'sweetalert2'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginRight: theme.spacing(2),
-    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(0),
+    marginLeft: theme.spacing(0),
     display: "flex",
     flexGrow: 1,
   },
@@ -94,6 +95,12 @@ export default function SearchAppBar() {
   const logoutSubmit = (e) => {
     e.preventDefault();
     dispatch(sendLogoutRequest());
+    Swal.fire({
+      title: `Vuelva prontos`,
+      text: `gracias por visitarnos`,
+      icon: "success",
+      timer: "2000"
+    })
     history.push("/comic");
   };
 
