@@ -25,7 +25,7 @@ Product.init({
         allowNull: false,
     },
     stock:{
-        type: S.STRING,
+        type: S.INTEGER,
         allowNull: false
     },
     descripcion: {
