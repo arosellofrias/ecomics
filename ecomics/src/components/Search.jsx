@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getComicsRequest, getComicsByTitle } from "../state/comics";
+import { useDispatch } from "react-redux";
+import {getComicsByTitle } from "../state/comics";
 
+const Search = () => {
+  const dispatch = useDispatch();
 
-export default ()=>{
-    const dispatch = useDispatch();
-
-    const [comic, setComic] = useState("");
+  const [comic, setComic] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -16,27 +15,24 @@ export default ()=>{
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getComicsByTitle(comic));
-    setComic("")
-    
+    setComic("");
   };
 
-  const comicsByTitle = useSelector((state) => state.comicsByTitle);
 
-
-return(
+  return (
     <div>
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
           <h3>Buscate un comic:</h3>
           <input
-            
             placeholder="Mandale un comic"
             onChange={(e) => handleChange(e)}
             value={comic}
           ></input>
         </form>
-        </div>
+      </div>
     </div>
-)
+  );
+};
 
-}
+export default Search;

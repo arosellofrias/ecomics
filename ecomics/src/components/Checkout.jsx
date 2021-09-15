@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default () => {
+const Checkout = () => {
+  return <div>checkout</div>;
+};
 
-
-    return(
-        <div>checkout</div>
-    )
-}
+export default Checkout;
