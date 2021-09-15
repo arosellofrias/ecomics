@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {Order,OrderItem,Product,Cart, CartItem}=require("../models")
+const S = require("sequelize")
 
 
 router.get("/",(req,res)=>{
@@ -29,6 +30,7 @@ router.get("/",(req,res)=>{
 
 router.post("/",(req,res)=>{//Primero esta, desp checkout
     let {cartId,userId,formaDePago,fecha}=req.body
+    console.log("REQBODY==>", req.body)
     Order.create({
         userId:userId,
         formaDePago:formaDePago,
@@ -45,10 +47,12 @@ router.post("/",(req,res)=>{//Primero esta, desp checkout
                         productId:cart.productId,
                         cantidad:cart.cantidad
                     }).then(t=>{
-                        res.send(t)
-                    })
+                        Product.update({stock:S.literal(`stock - ${cart.cantidad}`)},
+                        {where:{id:cart.productId}})})
                 })
+                res.send("cart-data")
         })
+        
     })
     .catch(e=>e)
 })
