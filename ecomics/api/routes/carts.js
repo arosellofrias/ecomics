@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {Cart,User, CartItem,Product} = require("../models")
+const S = require("sequelize")
 
 
 
@@ -97,5 +98,18 @@ router.delete("/checkout", (req, res) => {
     }).then(data => res.json(data))
 }
 )
+
+router.put("/sub",(req,res)=>{//true:+1 false:-1
+    let {bool,productId,cartId}=req.body
+    let buleano = bool?1:-1
+    CartItem.update({cantidad:S.literal(`cantidad + ${buleano}`)}
+        ,{where:{
+        productId:productId,
+        cartId:cartId
+        },
+        returning:true,
+        plain:true})
+    .then((data)=>res.send(data[1]))
+})
 
 module.exports = router;

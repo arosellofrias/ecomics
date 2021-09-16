@@ -3,6 +3,11 @@ const router = express.Router();
 const {Category, Product} = require('../models') 
 const {Op} = require('sequelize')
 
+router.get("/",(req,res)=>{
+    Category.findAll()
+        .then(data=>res.json(data))
+        .catch(e=>e)
+})
 
 router.get("/:category", (req, res)=>{
     let categoria = req.params.category
