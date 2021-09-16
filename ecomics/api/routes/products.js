@@ -2,24 +2,58 @@ const express = require("express");
 const { Op } = require("sequelize");
 
 const router = express.Router();
-const {Product,Category} = require("../models")
-
-
+const {Product,Category,Review} = require("../models")
 
 router.get("/",(req,res)=>{
     Product.findAll()
-    .then(data=>{
-        // console.log(data)
-        res.json(data)
+    .then(async data=>{
+        return await Promise.all(data.map(async prod=>(
+            await Review.findAll(
+                {
+                    where: {
+                      productId: {
+                        [Op.eq]: prod.id
+                      }
+                    }
+                  }
+            ).then(revs=>{
+                let arreglo = revs.map(rev=>rev.rating)
+                prod.dataValues["ratings"]=arreglo
+                return prod
+            })
+        ))
+         )
+    }).then( (d)=>{
+        res.send(d)
     })
 })
+
 
 router.get("/search/:titulo", (req, res) =>{
     const titulo = req.params.titulo
     Product.findAll({where : {nombre :{
         [Op.iLike] : `%${titulo}%`}
     }})
-    .then(data => res.json(data))
+    .then(async data=>{
+        return await Promise.all(data.map(async prod=>(
+            await Review.findAll(
+                {
+                    where: {
+                      productId: {
+                        [Op.eq]: prod.id
+                      }
+                    }
+                  }
+            ).then(revs=>{
+                let arreglo = revs.map(rev=>rev.rating)
+                prod.dataValues["ratings"]=arreglo
+                return prod
+            })
+        ))
+         )
+    }).then( (d)=>{
+        res.send(d)
+    })
 })
 
 router.get("/:id",(req,res)=>{

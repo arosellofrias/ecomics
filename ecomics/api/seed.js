@@ -1,5 +1,6 @@
 const prods = require("./productos.json")
 const users = require("./usuarios.json")
+const reviews = require("./reviews.json")
 const axios = require("axios")
 
 const {Cart, CartItem, Order, OrderItem, Product, User, Category} = require("./models")
@@ -52,6 +53,7 @@ function seedUsers(){
         })
 }
 
+
 async function seedearTODO(){
     const promesa = await seedCategories(categorias)
     return await Promise.all(promesa)
@@ -60,7 +62,6 @@ async function seedearTODO(){
 
 
 seedearTODO().then(()=>{
-
     seedProd()
     seedUsers()
 })
