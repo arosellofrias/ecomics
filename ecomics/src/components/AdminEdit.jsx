@@ -50,7 +50,7 @@ const AdminEdit = () => {
       })
       .then((res) => {
         Swal.fire({
-          title: `ArtÃ­culo modificado`,
+          title: `Articulo modificado`,
           text: `modificaste correctamente`,
           icon: "success",
           timer: "2000",

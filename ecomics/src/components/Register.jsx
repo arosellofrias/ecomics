@@ -3,9 +3,13 @@ import { useDispatch } from "react-redux";
 import { sendRegisterRequest } from "../state/userRegister";
 import "./compStyles/Login.css";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router";
+
+
 
 const Register = () => {
   const dispatch = useDispatch();
+  const history = useHistory()
 
   const [usr, setUsr] = React.useState({
     nombre: "",
@@ -33,6 +37,7 @@ const Register = () => {
         timer: "2000",
       });
     });
+    history.push("/comic")
   };
 
   return (

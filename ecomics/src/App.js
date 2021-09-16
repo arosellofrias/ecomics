@@ -11,6 +11,7 @@ import ComicsFilter from "./components/ComicsFilter";
 import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
 import Ordenes from "./components/Ordenes"
+import AdminUsers from './components/AdminUsers'
 
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -48,7 +49,8 @@ function App() {
         <Route path="/logout" component={Logout} />
         <Route path="/cart" component={Carrito} />
         <Route path="/register" component={Register} />
-         <Route path ="/admin" component={AdminPage}/>
+        <Route exact path="/admin" component={AdminPage}/>
+        <Route path= "/admin/users" component={AdminUsers}/>
         <Route path="/category/mangas" component={MangasFilter} />
         <Route path="/category/comics" component={ComicsFilter} />
         <Route path ="/edit/:id" component={AdminEdit}/>
