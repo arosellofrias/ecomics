@@ -14,10 +14,8 @@ const SingleOrder = ()=>{
         .then(res=>setOrderDetails(res.data))
         .catch(e=>console.log("erorr", e))
     },[])
-   /*  const f = ()=>{
-        ret
-    }
- */
+    let precioTotal = 0
+  
     return(
         <div>
             {console.log("singleORder===>", orderDetails)}
@@ -30,8 +28,15 @@ const SingleOrder = ()=>{
                          comic.id == ord.productId
                      )
                  })
+                
+                 let sumador = (orderFilter[0].precio * ord.cantidad)
+                 precioTotal = precioTotal + sumador
+
+                 
               return (
                   <div>
+                      {console.log("SUMVUELTAS==>",sumador)}
+                      {console.log("totalVueltas===>",precioTotal )}
                       <h5>Item:</h5>
                       {console.log("ord", ord)}
                       {console.log("filtromap",orderFilter)}
@@ -53,7 +58,9 @@ const SingleOrder = ()=>{
                       
                   </div>
               )
-            })}    
+            })}  
+            {console.log("LAPOSSSSTA=>",precioTotal )} 
+            <h1>PRECIO TOTAL : {`${precioTotal}`}</h1> 
             
         </div>
        
