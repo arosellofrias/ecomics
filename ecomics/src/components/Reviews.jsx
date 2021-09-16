@@ -11,13 +11,16 @@ const Reviews = () => {
   const params = useParams();
   const paramsId = Number(params.id);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const idUser = Number(isLoggedIn.id);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const idUser = user.id;
+  /* const idUser = Number(isLoggedIn.id); */
   const [review, setReview] = React.useState({
     rating: "",
     comentario: "",
     userId: idUser,
     productId: paramsId,
   });
+  const [obj, setObj] = React.useState({})
 
   const { rating, comentario, userId, productId } = review;
 
@@ -29,13 +32,14 @@ const Reviews = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(review);
+    console.log("que me llega?????==>>>",review);
+    
     dispatch(createReviewRequest(review)).then((res) => {
-      console.log("REVIEW", res);
+      setObj(res)
       if (res.payload) {
         Swal.fire({
           title: `${res.payload}`,
-          text: ` Ya calificaste este artÃ­culo`,
+          text: ` Ya calificaste este arti­culo`,
           icon: "success",
           timer: "2000",
         });
@@ -52,7 +56,7 @@ const Reviews = () => {
 
   React.useEffect(() => {
     dispatch(reviewRequest(paramsId));
-  }, [paramsId]);
+  }, [paramsId,review]);
 
   const allReviewsSingle = useSelector((state) => state.allReviewsSingle);
 

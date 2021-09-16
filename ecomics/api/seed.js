@@ -1,6 +1,5 @@
 const prods = require("./productos.json")
 const users = require("./usuarios.json")
-const reviews = require("./reviews.json")
 const axios = require("axios")
 
 const {Cart, CartItem, Order, OrderItem, Product, User, Category} = require("./models")
