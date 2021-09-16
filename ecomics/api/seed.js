@@ -25,7 +25,7 @@ function seedProd  (){
                     formato:producto.formato,
                     imagenUrl:producto.imagen,
                     precio:producto.precio,
-                    paginas:producto.paginas,
+                    agno:producto.agno,
                     stock:producto.stock,
                     descripcion:producto.descripcion,
                     categoryId:data.dataValues.id

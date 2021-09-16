@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {User,Category} = require('../models')
+const {User,Category, Order} = require('../models')
 const {Op} = require('sequelize');
 
 
@@ -76,6 +76,13 @@ router.delete("/:id", (req, res) =>{
         id: userId
     }}
     ).then(data => res.status(202).json(data))
+})
+
+
+router.get("/",(req,res)=>{
+    Order.findAll()
+    .then(data=>res.json(data))
+    .catch(e=>e)
 })
 
 
