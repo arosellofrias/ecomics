@@ -5,7 +5,8 @@ const S = require("sequelize")
 
 
 router.get("/",(req,res)=>{
-    let {userId,orderId} = req.body
+    console.log("reqBodyy==>", req.query)
+    let {userId,orderId} = req.query
     if(userId)
     {Order.findAll({//Trae todas las ordenes de un userId
         where: {

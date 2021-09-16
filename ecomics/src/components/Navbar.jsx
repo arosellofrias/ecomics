@@ -145,39 +145,46 @@ export default function SearchAppBar() {
             >
               {token ? (
                 <>
-                  <Button
+                  <Link to="/login"><Button
                     onClick={logoutSubmit}
                     variant="contained"
                     color="secondary"
                   >
-                    <Link to="/login">Logout</Link>
-                  </Button>
-                  <Button
+                    Logout
+                  </Button></Link>
+                  <Link to="/cart"><Button
                     variant="contained"
                     color="primary"
                     href="#contained-buttons"
                   >
-                    <Link to="/cart">Carrito</Link>
-                  </Button>
+                   Carrito
+                  </Button></Link>
+                  <Link to="/order"><Button
+                    variant="contained"
+                    color="primary"
+                    href="#contained-buttons"
+                  >
+                   Órdenes
+                  </Button></Link>
                 </>
               ) : (
                 <>
                   {" "}
-                  <Button variant="contained" color="primary">
-                    <Link to="/login">Login</Link>
-                  </Button>
-                  <Button variant="contained" color="secondary">
-                    <Link to="/register">register</Link>
-                  </Button>{" "}
+                  <Link to="/login"><Button variant="contained" color="primary">
+                    Login
+                  </Button></Link>
+                  <Link to="/register"><Button variant="contained" color="secondary">
+                  register
+                  </Button></Link>{" "}
                 </>
               )}
-              <Button
+              <Link to="/comics"><Button
                 variant="contained"
                 color="primary"
                 href="#contained-buttons"
               >
-                <Link to="/comics">Home</Link>
-              </Button>
+                Home
+              </Button></Link>
               <Button
                 variant="contained"
                 color="primary"
