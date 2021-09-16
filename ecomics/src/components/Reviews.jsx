@@ -12,7 +12,7 @@ const Reviews = () => {
   const paramsId = Number(params.id);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = JSON.parse(localStorage.getItem("user"));
-  const idUser = user.id;
+  const idUser = user.id?user.id:0
   /* const idUser = Number(isLoggedIn.id); */
   const [review, setReview] = React.useState({
     rating: "",
@@ -20,7 +20,6 @@ const Reviews = () => {
     userId: idUser,
     productId: paramsId,
   });
-  const [obj, setObj] = React.useState({})
 
   const { rating, comentario, userId, productId } = review;
 
@@ -32,10 +31,13 @@ const Reviews = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("que me llega?????==>>>",review);
-    
+    if(userId === 0){Swal.fire({
+      title: `No podes calificar`,
+      text: `Necesitas loguearte`,
+      icon: "success",
+      timer: "2000",
+    });}
     dispatch(createReviewRequest(review)).then((res) => {
-      setObj(res)
       if (res.payload) {
         Swal.fire({
           title: `${res.payload}`,
@@ -99,7 +101,7 @@ const Reviews = () => {
           <div>
             <h2>
               Rating:<Stack spacing={1}>
-              <Rating name="half-rating" defaultValue={review.rating} precision={0.1} readOnly />
+              <Rating name="half-rating" value={review.rating} precision={0.1} readOnly />
             </Stack>
 
             </h2>
