@@ -8,13 +8,15 @@ import axios from 'axios'
 
 const AdminUsers = () => {
     const [users, setUsers] = useState([])
+    const [cambios, setCambios] = useState({})
+    const [eliminado, setEliminado] = useState(0)
     const user = JSON.parse(localStorage.getItem("user"))
     const userId = user.id
 
     useEffect(() => {
         Axios.get(`http://localhost:3001/api/admin/users/1`)
             .then(res => setUsers(res.data))
-    },[])
+    },[cambios, eliminado])
 
     const handleAdmin = (userId, privilegios) => {
         Swal.fire({
@@ -32,14 +34,14 @@ const AdminUsers = () => {
                 {
                     userId : userId,
                     privilegios: privilegios
-                })
+                }).then(res => setCambios(res.data))
               }
           })
           .then((data) => {
             Swal.fire("Cambiado", "Cambio de estado correcto", "success");
           })
     }
-
+    console.log(cambios)
     const handleDelete = (id) => {
         Swal.fire({
             title: "¿Seguro quieres eliminar permanentemente?",
@@ -50,12 +52,14 @@ const AdminUsers = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Sí, eliminalo",
           })
-        .then(
-            axios.delete(`http://localhost:3001/api/admin/users/${userId}`,
-            {data: {
-                userId: id
-            }})
-        )
+        .then((result)=>{
+            if (result.isConfirmed){
+                axios.delete(`http://localhost:3001/api/admin/users/${userId}`,
+                {data: {
+                    userId: id
+                }}).then(res => setCambios(res))
+            }
+        })
         .then(data => {
             Swal.fire("Eliminado", "El usuario fue eliminado correctamente", "success");
         })
