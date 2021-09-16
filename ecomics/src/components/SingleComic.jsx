@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { singleComicRequest } from "../state/comics";
@@ -7,7 +7,10 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import styles from "./compStyles/singleComic.module.css";
-import { IconButton } from "@material-ui/core";
+import Reviews from "./Reviews";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import { reviewRequest } from "../state/review";
 
 const SingleComic = (props) => {
   const dispatch = useDispatch();
@@ -15,6 +18,7 @@ const SingleComic = (props) => {
   const params = useParams();
   const paramsId = params.id;
   const [counter, setCounter] = useState(1);
+  const [rating, setRating] = useState(0);
 
   const descreaseCounter = () => {
     if (counter > 1) {
@@ -55,14 +59,18 @@ const SingleComic = (props) => {
 
   useEffect(() => {
     dispatch(singleComicRequest(paramsId));
-  }, [paramsId]);
+    dispatch(reviewRequest(paramsId)).then((res) => {
+      const allReviewsSingle = res.payload;
+      const posts = allReviewsSingle.length;
+      const totalStars = allReviewsSingle.map((review) => review.rating);
+      const suma = totalStars.reduce((a, b) => a + b, 0);
+      const total = suma / posts;
+      setRating(total);
+    });
+  }, [paramsId, rating]);
+
   const singleComic = useSelector((state) => state.singleComic);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-
-  
-  const getRandomInt = () => {
-    return Math.floor(Math.random() * (6 - 1)) + 1;
-  };
 
   return (
     <div className={styles.container}>
@@ -73,17 +81,18 @@ const SingleComic = (props) => {
             src={singleComic.imagenUrl}
             alt={singleComic.nombre}
           />
-          
+
           <div className={styles.column}>
             <h1 className={styles.h1}>{singleComic.nombre}</h1>
             <p className={styles.details}>{singleComic.descripcion}</p>
-            <IconButton id={styles.star}>
-                {Array(getRandomInt())
-                  .fill()
-                  .map((_, i) => (
-                    <p>&#11088;</p>
-                  ))}
-              </IconButton>
+            <Stack spacing={1}>
+              <Rating
+                name="half-rating"
+                value={rating}
+                precision={0.1}
+                readOnly
+              />
+            </Stack>
             <h2 className={styles.h1}>
               Precio:<strong>{singleComic.precio}</strong>
             </h2>
@@ -98,6 +107,9 @@ const SingleComic = (props) => {
               <button onClick={increaseCounter}>+</button>
               <strong>{counter}</strong>
             </div>
+            <Link to="/review" component={Reviews}>
+              <button>Agregar Review</button>
+            </Link>
           </div>
         </>
       ) : (
