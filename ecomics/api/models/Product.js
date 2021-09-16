@@ -20,7 +20,7 @@ Product.init({
         type: S.FLOAT,
         allowNull: false
     },
-    paginas : {
+    agno : {
         type : S.INTEGER,
         allowNull: false,
     },
