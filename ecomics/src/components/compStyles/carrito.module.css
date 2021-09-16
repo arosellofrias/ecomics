@@ -1,0 +1,64 @@
+.cartComics {
+  display: flex;
+  grid-template-columns: repeat(auto-fill, 230px);
+  justify-content: center;
+  gap: 90px;
+  padding: 60px;
+  font-family: "Franklin Gothic Medium";
+}
+
+
+.cartItems {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    font-size: 24px;
+
+}
+
+.inputC{
+    justify-content: center;
+    margin: 2.5em;
+    width: 20em;
+}
+
+.singleComic {
+  width: 290px;
+  height: auto;
+}
+
+.img {
+  height: 420px;
+  width: 280px;
+  border-radius: 3px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.img:hover {
+  transition-duration: 500ms;
+  transform: scale(1.1);
+  opacity: 0.9;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 1);
+}
+
+
+.h1 {
+  font-size: 25px;
+  height: 55px;
+  letter-spacing: 1px;
+  font-family: "Franklin Gothic Medium";
+}
+
+
+.btns {
+    justify-content: center;
+    font-size: large;
+    background-color: transparent;
+    font-family: "Helvetica Neue";
+    border: none;
+}
+
+.btns:hover{
+    transform: scale(1.1);
+    opacity: 0.9;
+}
