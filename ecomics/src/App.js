@@ -10,6 +10,7 @@ import MangasFilter from "./components/MangasFilter";
 import ComicsFilter from "./components/ComicsFilter";
 import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
+import Ordenes from "./components/Ordenes"
 
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -45,13 +46,13 @@ function App() {
         <Route path="/comics/:id" component={SingleComic} />
         <Route path="/login" component={LoginUser} />
         <Route path="/logout" component={Logout} />
-
         <Route path="/cart" component={Carrito} />
         <Route path="/register" component={Register} />
          <Route path ="/admin" component={AdminPage}/>
         <Route path="/category/mangas" component={MangasFilter} />
         <Route path="/category/comics" component={ComicsFilter} />
         <Route path ="/edit/:id" component={AdminEdit}/>
+        <Route path ="/order" component={Ordenes} />
 
         <Redirect to="/comics" />
       </Switch>
