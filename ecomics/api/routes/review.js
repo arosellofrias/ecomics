@@ -3,7 +3,7 @@ const router = express.Router();
 const {User,Product,Review} = require('../models')
 
 router.get("/",(req,res)=>{
-    let {productId} = req.body
+    let {productId} = req.query
     Review.findAll(
         {where:{
             productId:productId
