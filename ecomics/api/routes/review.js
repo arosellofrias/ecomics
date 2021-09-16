@@ -9,6 +9,7 @@ router.get("/",(req,res)=>{
             productId:productId
         }}
     ).then(data=>{
+        console.log(data)
         res.json(data)
     })
 })
@@ -47,3 +48,6 @@ router.delete("/",(req,res)=>{
 
 
 module.exports= router
+
+
+
