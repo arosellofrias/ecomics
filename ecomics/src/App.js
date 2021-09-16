@@ -11,6 +11,7 @@ import ComicsFilter from "./components/ComicsFilter";
 import LoginUser from "./components/LoginUser";
 import { Logout } from "./components/Logout";
 import Ordenes from "./components/Ordenes"
+import SingleOrder from "./components/SingleOrder"
 
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
@@ -53,6 +54,7 @@ function App() {
         <Route path="/category/comics" component={ComicsFilter} />
         <Route path ="/edit/:id" component={AdminEdit}/>
         <Route path ="/order" component={Ordenes} />
+        <Route path="/singleOrder/:orderId" component={SingleOrder} />
 
         <Redirect to="/comics" />
       </Switch>
