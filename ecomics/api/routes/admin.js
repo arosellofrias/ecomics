@@ -43,7 +43,7 @@ router.put("/category",(req,res)=>{
     .catch(e=>e)
 })
 
-router.get("/:id", (req,res) => {
+router.get("/users/:id", (req,res) => {
     const id = req.params.id
     User.findAll({
         where:{
@@ -53,7 +53,7 @@ router.get("/:id", (req,res) => {
     .then(data => res.json(data))
 })
 
-router.put("/:id", (req, res) => {
+router.put("/users", (req, res) => {
     const {userId,privilegios} = req.body
     User.update(
        { privilegios :!privilegios},
@@ -68,7 +68,7 @@ router.put("/:id", (req, res) => {
     .catch(e=>e)
 })
 
-router.delete("/:id", (req, res) =>{
+router.delete("/users/:id", (req, res) =>{
     const id = parseInt(req.params.id)
     const {userId} = req.body
     if(id === userId) return (res.status(400).json("NO TE AUTODESTRUYAS, PEDÍ AYUDA"))

@@ -48,7 +48,7 @@ export default () => {
       })
         .then((result) => {
           if (result.isConfirmed) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            Swal.fire("Borrado", "El producto fue eliminado", "success");
           }
         })
         .then((data) => {
