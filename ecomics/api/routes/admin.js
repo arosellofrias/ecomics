@@ -27,7 +27,7 @@ router.post("/category",(req,res)=>{
 router.delete("/category",(req,res)=>{
     let id = req.body.id
     Category.destroy({where:{id:id}})
-    .then(()=>res.sendStatus(202))
+    .then((data)=>res.sendStatus(202).json(data))
     .catch(e=>e)
 })
 
