@@ -7,6 +7,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import styles from "./compStyles/singleComic.module.css";
+import { IconButton } from "@material-ui/core";
 
 const SingleComic = (props) => {
   const dispatch = useDispatch();
@@ -58,17 +59,13 @@ const SingleComic = (props) => {
   const singleComic = useSelector((state) => state.singleComic);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
-  /* 
-  Swal.fire({
-    title: ¡Agregaste!,
-    text: `${res.data[0].cantidad} - ${singleComic.nombre} a tu carrito`
-    
-  })
-  */
+  
+  const getRandomInt = () => {
+    return Math.floor(Math.random() * (6 - 1)) + 1;
+  };
 
   return (
     <div className={styles.container}>
-      {console.log("FUNCA??=>>", singleComic)}
       {Object.keys(singleComic).length ? (
         <>
           <img
@@ -76,9 +73,17 @@ const SingleComic = (props) => {
             src={singleComic.imagenUrl}
             alt={singleComic.nombre}
           />
+          
           <div className={styles.column}>
             <h1 className={styles.h1}>{singleComic.nombre}</h1>
             <p className={styles.details}>{singleComic.descripcion}</p>
+            <IconButton id={styles.star}>
+                {Array(getRandomInt())
+                  .fill()
+                  .map((_, i) => (
+                    <p>&#11088;</p>
+                  ))}
+              </IconButton>
             <h2 className={styles.h1}>
               Precio:<strong>{singleComic.precio}</strong>
             </h2>
