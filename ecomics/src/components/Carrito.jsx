@@ -105,7 +105,7 @@ export default () => {
             data: { cartId: valores[0].cartId },
           })
           .then((res) => {
-           /*  enviarMail(solucion, userEmail); */
+            enviarMail(solucion, userEmail); 
             setBorrados(res);
           });
       });
