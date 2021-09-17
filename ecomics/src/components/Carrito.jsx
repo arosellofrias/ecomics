@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import styles from "./compStyles/carrito.module.css";
+import { CloudSharp } from "@material-ui/icons";
 const emailjs = require("emailjs-com");
 emailjs.init("user_swQa08yjju8mCZ64zEuPO");
 
 export default () => {
-  const [carritoProductos, setCarritoProductos] = useState([]);
+  // const [cantItem,setCantItem]=useState(1)
+  //
+  const [carritoProductos, setCarritoProductos] = useState([]);//productId
   const [valores, setValores] = useState([]);
   const [borrados, setBorrados] = useState([]);
   const [pago, setPago] = useState("");
@@ -19,6 +22,7 @@ export default () => {
   const comics = useSelector((state) => state.comics);
   let array = [];
   let solucion = [];
+  let valFiltrados
 
   const f = new Date();
   const date = f.getMonth() + "/" + f.getDate() + "/" + f.getFullYear();
@@ -27,15 +31,19 @@ export default () => {
     axios
       .post("http://localhost:3001/api/cart", { cartId: userId })
       .then((res) => {
+        res.data.sort((a,b)=>a.productId-b.productId)
+        console.log("renderiza")
+        
         setValores(res.data);
         res.data.map((obj) => {
+         
           array.push(obj.productId);
         });
       })
       .then(() => setCarritoProductos(array));
   }, [borrados]);
 
-  const deleteComicCarrito = (productId) => {
+  const deleteComicCarrito = (productId,index) => {
     if (productId !== undefined)
       Swal.fire({
         title: "¿Estás seguro?",
@@ -66,6 +74,7 @@ export default () => {
                 icon: "info",
                 timer: "2000",
               });
+              console.log("renderizaDELETE")
               setBorrados(data);
             });
         });
@@ -142,6 +151,18 @@ export default () => {
   }
   const totalTotal = final.reduce(add, 0);
 
+const handleCantidad = (bool,prodId)=>{
+  let data={
+    bool:bool,
+    productId:prodId,
+    cartId:1
+  }
+  axios.put("http://localhost:3001/api/cart/sub",data)
+    .then(()=>{
+      setBorrados([])
+    })
+
+}
   return (
     <div>
       <div className={styles.cartItems}>
@@ -172,13 +193,15 @@ export default () => {
             <h1 className={styles.h1}>{singleCarritoComic.nombre}</h1>
             <img className={styles.img} src={singleCarritoComic.imagenUrl} />
             <div>
-              <button>-</button>
-              CANTIDAD
-              <button>+</button>
+              {valores.filter(valor=>valor.productId===singleCarritoComic.id).length?(valores.filter(valor=>valor.productId===singleCarritoComic.id)[0].cantidad>1?<button onClick={()=>handleCantidad(false,singleCarritoComic.id)}>-</button>:null):null}
+              {
+               solucion.filter(sarasa=>sarasa.comic.id===singleCarritoComic.id).length?solucion.filter(sarasa=>sarasa.comic.id===singleCarritoComic.id)[0].cantidad:null
+              }
+              {valores.filter(valor=>valor.productId===singleCarritoComic.id).length?(valores.filter(valor=>valor.productId===singleCarritoComic.id)[0].cantidad<singleCarritoComic.stock?<button onClick={()=>handleCantidad(true,singleCarritoComic.id)}>+</button>:null):null}
             </div>
             <button
               className={styles.btns}
-              onClick={() => deleteComicCarrito(singleCarritoComic.id)}
+              onClick={() => deleteComicCarrito(singleCarritoComic.id,index)}
             >
               eliminar del carrito
             </button>
