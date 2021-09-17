@@ -70,6 +70,7 @@ const SingleComic = () => {
 
   const singleComic = useSelector((state) => state.singleComic);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const soldOut = "https://www.meme-arsenal.com/memes/583a3b2201a13798ea156eaea424ab61.jpg"
 
   return (
     <div className={styles.todo}>
@@ -99,6 +100,18 @@ const SingleComic = () => {
             <h2 className={styles.h1}>
               Disponibles: <strong>{singleComic.stock}</strong>
             </h2>
+
+            {singleComic.stock===0?(<img className={styles.imgout} src={soldOut}></img>):(<div>
+              <button className={styles.h1} onClick={handleSubmit}>
+                Agregar al carrito
+              </button>
+              <button onClick={descreaseCounter}>-</button>
+              <button onClick={increaseCounter}>+</button>
+              <strong>{counter}</strong>
+            </div>)}
+            
+            <Reviews/>
+
             <div>
             <div>
               <button 
@@ -116,6 +129,7 @@ const SingleComic = () => {
               
             </div>
           </div>
+
           </div>
         </>
         

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./compStyles/comics.module.css";
 import Rating from "@mui/material/Rating";
 
+
 import { reviewRequest } from "../state/review";
 
 
@@ -36,16 +37,19 @@ const Comics = () => {
                     alt={singleComic.nombre}
                   />
                   <strong>${singleComic.precio}</strong>
+
                 </Link>
                 <div>
+
                   <Rating
                     name="half-rating"
                     value={total}
                     precision={0.1}
                     readOnly
                   />
+
               </div>
-                
+
               </div>
             );
           })

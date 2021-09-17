@@ -57,5 +57,6 @@
 } 
 
 #star{
-  color:yellow
+  color:yellow;
+  align-items: center;
 }

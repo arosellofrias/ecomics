@@ -42,3 +42,11 @@ export const getComicsRequest = createAsyncThunk("COMICS", async() => {
   export const deleteComicReducer = createReducer([],{
     [deleteComicRequest.fulfilled]: (state,action)=>action.payload
   })
+
+  export const createComicRequest= createAsyncThunk("CREATE_COMIC", async (obj) =>{
+
+    return await(
+       axios.post(`http://localhost:3001/api/product/`,obj).then((r) => r)
+
+    )
+  })
