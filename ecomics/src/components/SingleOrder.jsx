@@ -44,7 +44,7 @@ const SingleOrder = () => {
                   <strong>${`${orderFilter[0].precio}`}</strong>{" "}
                 </p>
                 <p>
-                  Total:{" "}
+                  SubTotal:{" "}
                   <strong>${`${orderFilter[0].precio * ord.cantidad}`}</strong>{" "}
                 </p>
               </div>
@@ -62,7 +62,7 @@ const SingleOrder = () => {
           
         );
       })}
-      <h1>PRECIO TOTAL : {`${precioTotal}`}</h1>
+      <h1>PRECIO TOTAL : {`$${precioTotal}`}</h1>
     </div>
   );
 };
