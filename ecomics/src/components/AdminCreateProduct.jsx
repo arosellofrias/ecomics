@@ -40,7 +40,7 @@ const AdminCreateProduct = () => {
         timer: "2000",
       });
     });
-    history.push("/comic");
+    history.push("/comics");
   };
 
   const user = localStorage.getItem("user");
