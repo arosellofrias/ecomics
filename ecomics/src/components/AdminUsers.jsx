@@ -15,7 +15,7 @@ const AdminUsers = () => {
     const userId = user.id
 
     useEffect(() => {
-        Axios.get(`http://localhost:3001/api/admin/users/1`)
+        Axios.get(`http://localhost:3001/api/admin/users/${userId}`)
             .then(res => setUsers(res.data))
     },[cambios, eliminado])
 
