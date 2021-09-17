@@ -112,22 +112,14 @@ const SingleComic = () => {
             
             {/* <Reviews/> */}
 
-            <div>
-            <div>
-              <button 
-              className={styles.btn}
-              onClick={descreaseCounter}>-</button>
-              <button 
-              className={styles.btn}
-              onClick={increaseCounter}>+</button>
-              <strong>{counter}</strong>
-              </div>
-              <button className={styles.h3} onClick={handleSubmit}>
+            {singleComic.stock===0?(<img className={styles.imgout} src={soldOut}></img>):(<div>
+              <button className={styles.h1} onClick={handleSubmit}>
                 Agregar al carrito
               </button>
-              
-              
-            </div>
+              <button onClick={descreaseCounter}>-</button>
+              <button onClick={increaseCounter}>+</button>
+              <strong>{counter}</strong>
+            </div>)}
           </div>
 
           </div>

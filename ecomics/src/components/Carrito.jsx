@@ -200,7 +200,7 @@ const handleCantidad = (bool,prodId)=>{
           <div key={singleCarritoComic.id} className={styles.singleComic}>
             <h1 className={styles.h1}>{singleCarritoComic.nombre}</h1>
             <img className={styles.img} src={singleCarritoComic.imagenUrl} />
-            <div>
+            <div >
 
               {valores.filter(valor=>valor.productId===singleCarritoComic.id).length?(valores.filter(valor=>valor.productId===singleCarritoComic.id)[0].cantidad>1?<button onClick={()=>handleCantidad(false,singleCarritoComic.id)}>-</button>:null):null}
               {

@@ -63,3 +63,8 @@
     transform: scale(1.1);
     opacity: 0.9;
 }
+
+.div{
+  height: 300px;
+  width: 300px;
+}
