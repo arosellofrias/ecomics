@@ -12,16 +12,16 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AddressForm from "./checkout/AddressForm"
-import PaymentForm from './checkout/PaymentForm';
-import Review from './checkout/Review';
+import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
+import Review from './Review';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        E-COMICS
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -29,7 +29,7 @@ function Copyright() {
   );
 }
 
-const steps = ['Dirección de envío', 'Detalles de pago', 'Confirmación'];
+const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
 function getStepContent(step) {
   switch (step) {
@@ -94,7 +94,7 @@ export default function Checkout() {
                   Gracias por su compra
                 </Typography>
                 <Typography variant="subtitle1">
-                  Tu orden es la número #2001539. Estaremos enviando un mail de confirmación, y serás notificado cuando tu orden esté viajando.
+                  Su número de orden es #2001539. Enviaremos email de confirmación de compra, y daremos aviso cuando el envío esté cerca.
                 </Typography>
               </React.Fragment>
             ) : (

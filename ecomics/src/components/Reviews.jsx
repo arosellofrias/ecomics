@@ -6,6 +6,7 @@ import { createReviewRequest, reviewRequest } from "../state/review";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 
+
 const Reviews = () => {
   const dispatch = useDispatch();
   const params = useParams();
@@ -13,7 +14,7 @@ const Reviews = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const idUser = user ? user.id : 0;
   const [review, setReview] = React.useState({
-    rating: "",
+    rating: 2,
     comentario: "",
     userId: idUser,
     productId: paramsId,
@@ -72,7 +73,13 @@ const Reviews = () => {
         name="form"
         onSubmit={(e) => handleSubmit(e)}
       >
-        <input
+        <Rating
+          name= "rating"
+          value={review.rating}
+          onChange={handleChange}
+          >
+        </Rating>
+        {/* <input
           aria-label="required"
           placeholder="Rating de 1 a 5"
           type="number"
@@ -80,7 +87,7 @@ const Reviews = () => {
           value={rating}
           onChange={handleChange}
           className="form-control"
-        ></input>
+        ></input> */}
         <br></br>
         <textarea
           aria-label="required"
@@ -111,9 +118,9 @@ const Reviews = () => {
                 />
               </Stack>
             </h2>
-
+            
             <h2>
-              Comentario:<strong>{review.comentario}</strong>
+              Comentario: {review.comentario}
             </h2>
           </div>
         ))}

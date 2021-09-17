@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import SingleOrder from "./SingleOrder"
 import axios from "axios";
+import Divider from '@mui/material/Divider';
+import Button from "@material-ui/core/Button";
 
 const Ordenes = ()=>{
     const user = JSON.parse(localStorage.getItem("user"));
@@ -16,20 +18,29 @@ const Ordenes = ()=>{
     },[])
     return(
         <div>
-            {console.log("userId==>",userId )}             
-            <h1>ordenes</h1>
-            {console.log("ORDERS=>", orders)}
+            <h1>Ordenes</h1>
             {orders.length !== 0 ? 
             <>
             {orders.map(order=>(
                 <div>
-                    <h3>Order Id:{order.id}</h3>
+                    <h3>Número de orden:{order.id}</h3>
                     <h3>Fecha:{order.fecha}</h3>
                     <h3>Forma de pago: {order.formaDePago}</h3>
-                    <Link to= {`/singleOrder/${order.id}`}><button>Mas detalles</button></Link>
+                    <Link to= {`/singleOrder/${order.id}`}>
+                    <Button
+                    variant="outlined" size="large"
+                    >Mas detalles</Button></Link>
+                    <Divider/>
+                    
                 </div>
             ))}
-            </> : <h1>Loading..</h1>}
+            </> : 
+            <div>
+                <h1>No se pudo mostrar la lista de ordenes</h1>
+                <h3>Te recomendamos volver a logearte</h3>
+            </div>
+            
+            }
         
         </div>
        

@@ -73,9 +73,10 @@ const SingleComic = () => {
   const soldOut = "https://www.meme-arsenal.com/memes/583a3b2201a13798ea156eaea424ab61.jpg"
 
   return (
-    <div className={styles.container}>
+    <div className={styles.todo}>
       {Object.keys(singleComic).length ? (
         <>
+          <div className={styles.container}>
           <img
             className={`${styles.img} ${styles.column}`}
             src={singleComic.imagenUrl}
@@ -99,6 +100,7 @@ const SingleComic = () => {
             <h2 className={styles.h1}>
               Disponibles: <strong>{singleComic.stock}</strong>
             </h2>
+
             {singleComic.stock===0?(<img className={styles.imgout} src={soldOut}></img>):(<div>
               <button className={styles.h1} onClick={handleSubmit}>
                 Agregar al carrito
@@ -109,11 +111,34 @@ const SingleComic = () => {
             </div>)}
             
             <Reviews/>
+
+            <div>
+            <div>
+              <button 
+              className={styles.btn}
+              onClick={descreaseCounter}>-</button>
+              <button 
+              className={styles.btn}
+              onClick={increaseCounter}>+</button>
+              <strong>{counter}</strong>
+              </div>
+              <button className={styles.h3} onClick={handleSubmit}>
+                Agregar al carrito
+              </button>
+              
+              
+            </div>
+          </div>
+
           </div>
         </>
+        
       ) : (
         <h1>Loading..</h1>
       )}
+      <div>
+        <Reviews/>
+        </div>
     </div>
   );
 };

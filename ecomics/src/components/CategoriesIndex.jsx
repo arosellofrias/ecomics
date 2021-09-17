@@ -2,6 +2,8 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios"
+import Button from "@material-ui/core/Button";
+
 
 const CategoriesIndex = ()=>{
     const [categorias, setCategorias] = useState([])
@@ -13,16 +15,26 @@ const CategoriesIndex = ()=>{
     return(
         <div>
             <h1>Categorías index</h1>
-            {console.log("categorias==>", categorias)}
-            {categorias.map(cat=>{
-                {console.log("CAT==>", cat)}
+                <div>
+                {categorias.map(cat=>{
                 return(
-                    <div key={cat.id}>
-                        <Link to={`/category/${cat.nombre}`}><button>{cat.nombre}</button></Link>
+                    <div key={cat.id} >
+                        <Link to={`/category/${cat.nombre}`}>
+                            <Button
+                            variant='outlined'
+                            color='primary'
+                            size= "large"
+                            fullWidth = "true"
+                            >
+                                {cat.nombre}
+                            </Button>
+                        </Link>
                     </div>
                 )
                
             })}
+                </div>
+            
         </div>
         
     )
