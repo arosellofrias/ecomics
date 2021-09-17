@@ -72,9 +72,10 @@ const SingleComic = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.todo}>
       {Object.keys(singleComic).length ? (
         <>
+          <div className={styles.container}>
           <img
             className={`${styles.img} ${styles.column}`}
             src={singleComic.imagenUrl}
@@ -99,19 +100,31 @@ const SingleComic = () => {
               Disponibles: <strong>{singleComic.stock}</strong>
             </h2>
             <div>
-              <button className={styles.h1} onClick={handleSubmit}>
+            <div>
+              <button 
+              className={styles.btn}
+              onClick={descreaseCounter}>-</button>
+              <button 
+              className={styles.btn}
+              onClick={increaseCounter}>+</button>
+              <strong>{counter}</strong>
+              </div>
+              <button className={styles.h3} onClick={handleSubmit}>
                 Agregar al carrito
               </button>
-              <button onClick={descreaseCounter}>-</button>
-              <button onClick={increaseCounter}>+</button>
-              <strong>{counter}</strong>
+              
+              
             </div>
-            <Reviews/>
+          </div>
           </div>
         </>
+        
       ) : (
         <h1>Loading..</h1>
       )}
+      <div>
+        <Reviews/>
+        </div>
     </div>
   );
 };
