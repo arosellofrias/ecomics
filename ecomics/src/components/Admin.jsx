@@ -11,6 +11,11 @@ const Admin = () => {
         <>
           <div>
             <h1>Panel admin</h1>
+            <Link to="/admin/create">
+              <Button variant="outlined" color="primary" size="large">
+                Crear Productos
+              </Button>
+            </Link>
             <Link to="/admin/productos">
               <Button variant="outlined" color="primary" size="large">
                 Admin Productos
