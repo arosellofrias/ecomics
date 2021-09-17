@@ -23,6 +23,7 @@ import Admin from "./components/Admin"
 import AdminCategories from "./components/AdminCategories"
 import CategoriesIndex from "./components/CategoriesIndex"
 import CategoriaPorNombre from "./components/CategoriaPorNombre"
+import AdminCreateProduct from "./components/AdminCreateProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,7 +59,8 @@ function App() {
         <Route exact path="/admin" component={Admin}/>
         <Route exact path="/admin/productos" component={AdminPage}/>
         <Route path= "/admin/users" component={AdminUsers}/>
-        <Route path= "/admin/categories" component={AdminCategories}/>
+        <Route path="/admin/categories" component={AdminCategories} />
+        <Route path= "/admin/create" component={AdminCreateProduct}/>
         <Route exact path="/category" component={CategoriesIndex} />
         <Route exact path="/category/:nombre" component={CategoriaPorNombre} />
         {/* <Route path="/category/mangas" component={MangasFilter} />

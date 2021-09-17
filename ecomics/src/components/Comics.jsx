@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./compStyles/comics.module.css";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import { reviewRequest } from "../state/review";
 
 const Comics = () => {
   const dispatch = useDispatch();
@@ -33,8 +32,7 @@ const Comics = () => {
                     alt={singleComic.nombre}
                   />
                   <strong>${singleComic.precio}</strong>
-                </Link>
-                <Stack spacing={1}>
+                <Stack id={styles.star} spacing={1}>
                   <Rating
                     name="half-rating"
                     value={total}
@@ -42,6 +40,7 @@ const Comics = () => {
                     readOnly
                   />
                 </Stack>
+                </Link>
               </div>
             );
           })
