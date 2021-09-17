@@ -10,10 +10,8 @@ const Reviews = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const paramsId = Number(params.id);
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = JSON.parse(localStorage.getItem("user"));
-  const idUser = user.id?user.id:0
-  /* const idUser = Number(isLoggedIn.id); */
+  const idUser = user ? user.id : 0;
   const [review, setReview] = React.useState({
     rating: "",
     comentario: "",
@@ -31,37 +29,40 @@ const Reviews = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(userId === 0){Swal.fire({
-      title: `No podes calificar`,
-      text: `Necesitas loguearte`,
-      icon: "success",
-      timer: "2000",
-    });}
-    dispatch(createReviewRequest(review)).then((res) => {
-      if (res.payload) {
-        Swal.fire({
-          title: `${res.payload}`,
-          text: ` Ya calificaste este arti­culo`,
-          icon: "success",
-          timer: "2000",
-        });
-      } else {
-        Swal.fire({
-          title: `Review enviado`,
-          text: `Calificaste correctamente`,
-          icon: "success",
-          timer: "2000",
-        });
-      }
-    });
+    if (userId === 0) {
+      Swal.fire({
+        title: `No podes calificar`,
+        text: `Necesitas loguearte`,
+        icon: "warning",
+        timer: "2000",
+      });
+    }
+    dispatch(createReviewRequest(review))
+      .then((res) => {
+        if (res.payload === "Ya has calificado") {
+          Swal.fire({
+            title: `${res.payload}`,
+            text: ` Ya calificaste este arti­culo`,
+            icon: "error",
+            timer: "2000",
+          });
+        } else {
+          Swal.fire({
+            title: `Review enviado`,
+            text: `Calificaste correctamente`,
+            icon: "success",
+            timer: "2000",
+          });
+        }
+      })
+      .then((res) => (dispatch(reviewRequest(paramsId))));
   };
 
   React.useEffect(() => {
     dispatch(reviewRequest(paramsId));
-  }, [paramsId,review]);
+  }, [paramsId, review]);
 
   const allReviewsSingle = useSelector((state) => state.allReviewsSingle);
-
 
   return (
     <div className="login">
@@ -100,16 +101,20 @@ const Reviews = () => {
         {allReviewsSingle.map((review) => (
           <div>
             <h2>
-              Rating:<Stack spacing={1}>
-              <Rating name="half-rating" value={review.rating} precision={0.1} readOnly />
-            </Stack>
-
+              Rating:
+              <Stack spacing={1}>
+                <Rating
+                  name="half-rating"
+                  value={review.rating}
+                  precision={0.1}
+                  readOnly
+                />
+              </Stack>
             </h2>
 
             <h2>
               Comentario:<strong>{review.comentario}</strong>
             </h2>
-            
           </div>
         ))}
       </div>

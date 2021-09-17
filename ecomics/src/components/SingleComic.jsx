@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { singleComicRequest } from "../state/comics";
@@ -12,9 +12,8 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { reviewRequest } from "../state/review";
 
-const SingleComic = (props) => {
+const SingleComic = () => {
   const dispatch = useDispatch();
-  console.log("PROPS", props);
   const params = useParams();
   const paramsId = params.id;
   const [counter, setCounter] = useState(1);
@@ -107,9 +106,7 @@ const SingleComic = (props) => {
               <button onClick={increaseCounter}>+</button>
               <strong>{counter}</strong>
             </div>
-            <Link to="/review" component={Reviews}>
-              <button>Agregar Review</button>
-            </Link>
+            <Reviews/>
           </div>
         </>
       ) : (

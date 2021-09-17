@@ -2,7 +2,6 @@ import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 export const reviewRequest = createAsyncThunk("REVIEWS_PRODUCT", async (productId) => {
-  console.log("EL_ID_PRODUCT",productId)
   return await axios
     .get(`http://localhost:3001/api/review`, { params: { productId:productId } })
     .then((r) => r.data);
