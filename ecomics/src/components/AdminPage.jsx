@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 const AdminPage = () => {
   const comics = useSelector((state) => state.comics);
   const dispatch = useDispatch();
+  const user = localStorage.getItem("user");
 
   const handleSubmit = (e, id) => {
     e.preventDefault();
@@ -24,7 +25,8 @@ const AdminPage = () => {
   };
 
   return (
-    <div className={styles.comics}>
+    <div>
+      {user && JSON.parse(user).privilegios === true ? <><div className={styles.comics}>
       {comics.map((comic) => (
         <div key={comic.id} className={styles.singleComic}>
           <h1 className={styles.h1}>{comic.nombre}</h1>
@@ -46,6 +48,8 @@ const AdminPage = () => {
           </div>
         </div>
       ))}
+    </div></>:<><h1>You shall not pass. </h1></>}
+    
     </div>
   );
 };

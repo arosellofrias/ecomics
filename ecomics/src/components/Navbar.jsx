@@ -84,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
   const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
   const dispatch = useDispatch();
   //trampa mortal
   const history = useHistory();
@@ -135,6 +136,7 @@ export default function SearchAppBar() {
   return (
     <>
       <div className={classes.root}>
+        {console.log("USER?????=>>>", user)}
         <AppBar position="static">
           <Toolbar>
             <IconButton
@@ -145,6 +147,13 @@ export default function SearchAppBar() {
             >
               {token ? (
                 <>
+                {JSON.parse(user).privilegios === true ? <> <Link to="/admin"><Button
+                    variant="contained"
+                    color="primary"
+                    href="#contained-buttons"
+                  >
+                   Admin
+                  </Button></Link> {console.log("priv==>",user.privilegios)}</>: <></>} 
                   <Link to="/login"><Button
                     onClick={logoutSubmit}
                     variant="contained"
@@ -166,6 +175,7 @@ export default function SearchAppBar() {
                   >
                    Órdenes
                   </Button></Link>
+                  
                 </>
               ) : (
                 <>
@@ -185,57 +195,14 @@ export default function SearchAppBar() {
               >
                 Home
               </Button></Link>
-              <Button
+              <Link to="/category"><Button
                 variant="contained"
                 color="primary"
                 href="#contained-buttons"
-                ref={anchorRef}
-                aria-controls={open ? "menu-list-grow" : undefined}
-                /* aria-haspopup="true" */
-                onClick={handleToggle}
               >
-                Categorias
-              </Button>
-              <div className={classes.root}>
-                <div>
-                  <Popper
-                    open={open}
-                    anchorEl={anchorRef.current}
-                    role={undefined}
-                    transition
-                    disablePortal
-                  >
-                    {({ TransitionProps, placement }) => (
-                      <Grow
-                        {...TransitionProps}
-                        style={{
-                          transformOrigin:
-                            placement === "bottom"
-                              ? "center top"
-                              : "center bottom",
-                        }}
-                      >
-                        <Paper>
-                          <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList
-                              autoFocusItem={open}
-                              id="menu-list-grow"
-                              onKeyDown={handleListKeyDown}
-                            >
-                              <MenuItem onClick={handleClose}>
-                                <Link to="/category/mangas">Mangas</Link>
-                              </MenuItem>
-                              <MenuItem onClick={handleClose}>
-                                <Link to="/category/comics">Comics</Link>
-                              </MenuItem>
-                            </MenuList>
-                          </ClickAwayListener>
-                        </Paper>
-                      </Grow>
-                    )}
-                  </Popper>
-                </div>
-              </div>
+                Categorías
+              </Button></Link>
+              
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               E-COMICS
