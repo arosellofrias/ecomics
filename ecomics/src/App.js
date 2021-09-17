@@ -19,6 +19,10 @@ import Register from "./components/Register";
 import Navbar from "./components/Navbar";
 import AdminPage from "./components/AdminPage";
 import AdminEdit from "./components/AdminEdit";
+import Admin from "./components/Admin"
+import AdminCategories from "./components/AdminCategories"
+import CategoriesIndex from "./components/CategoriesIndex"
+import CategoriaPorNombre from "./components/CategoriaPorNombre"
 
 function App() {
   const dispatch = useDispatch();
@@ -51,10 +55,14 @@ function App() {
         <Route path="/logout" component={Logout} />
         <Route path="/cart" component={Carrito} />
         <Route path="/register" component={Register} />
-        <Route exact path="/admin" component={AdminPage}/>
+        <Route exact path="/admin" component={Admin}/>
+        <Route exact path="/admin/productos" component={AdminPage}/>
         <Route path= "/admin/users" component={AdminUsers}/>
-        <Route path="/category/mangas" component={MangasFilter} />
-        <Route path="/category/comics" component={ComicsFilter} />
+        <Route path= "/admin/categories" component={AdminCategories}/>
+        <Route exact path="/category" component={CategoriesIndex} />
+        <Route exact path="/category/:nombre" component={CategoriaPorNombre} />
+        {/* <Route path="/category/mangas" component={MangasFilter} />
+        <Route path="/category/comics" component={ComicsFilter} /> */}
         <Route path ="/edit/:id" component={AdminEdit}/>
         <Route path ="/order" component={Ordenes} />
         <Route path="/singleOrder/:orderId" component={SingleOrder} />
