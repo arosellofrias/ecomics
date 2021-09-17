@@ -15,7 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(0),
     paddingLeft: theme.spacing(18),
-   
   },
   title: {
     justifyContent: "center",
@@ -45,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-   
+
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -96,9 +95,9 @@ export default function SearchAppBar() {
       title: `Vuelva prontos`,
       text: `gracias por visitarnos`,
       icon: "success",
-      timer: "2000"
-    })
-    history.push("/comic");
+      timer: "2000",
+    });
+    history.push("/comics");
   };
 
   const [open, setOpen] = React.useState(false);
@@ -136,8 +135,7 @@ export default function SearchAppBar() {
   return (
     <>
       <div className={classes.root}>
-        {console.log("USER?????=>>>", user)}
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Toolbar>
             <IconButton
               edge="start"
@@ -147,62 +145,83 @@ export default function SearchAppBar() {
             >
               {token ? (
                 <>
-                {JSON.parse(user).privilegios === true ? <> <Link to="/admin"><Button
-                    variant="contained"
-                    color="primary"
-                    href="#contained-buttons"
-                  >
-                   Admin
-                  </Button></Link> {console.log("priv==>",user.privilegios)}</>: <></>} 
-                  <Link to="/login"><Button
-                    onClick={logoutSubmit}
-                    variant="contained"
-                    color="secondary"
-                  >
-                    Logout
-                  </Button></Link>
-                  <Link to="/cart"><Button
-                    variant="contained"
-                    color="primary"
-                    href="#contained-buttons"
-                  >
-                   Carrito
-                  </Button></Link>
-                  <Link to="/order"><Button
-                    variant="contained"
-                    color="primary"
-                    href="#contained-buttons"
-                  >
-                   Órdenes
-                  </Button></Link>
-                  
+                  {JSON.parse(user).privilegios === true ? (
+                    <>
+                      {" "}
+                      <Link to="/admin">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          href="#contained-buttons"
+                        >
+                          Admin
+                        </Button>
+                      </Link>{" "}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  <Link to="/comics">
+                    <Button
+                      onClick={logoutSubmit}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      Logout
+                    </Button>
+                  </Link>
+                  <Link to="/cart">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      href="#contained-buttons"
+                    >
+                      Carrito
+                    </Button>
+                  </Link>
+                  <Link to="/order">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      href="#contained-buttons"
+                    >
+                      Órdenes
+                    </Button>
+                  </Link>
                 </>
               ) : (
                 <>
                   {" "}
-                  <Link to="/login"><Button variant="contained" color="primary">
-                    Login
-                  </Button></Link>
-                  <Link to="/register"><Button variant="contained" color="secondary">
-                  register
-                  </Button></Link>{" "}
+                  <Link to="/login">
+                    <Button variant="contained" color="primary">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/register">
+                    <Button variant="contained" color="secondary">
+                      register
+                    </Button>
+                  </Link>{" "}
                 </>
               )}
-              <Link to="/comics"><Button
-                variant="contained"
-                color="primary"
-                href="#contained-buttons"
-              >
-                Home
-              </Button></Link>
-              <Link to="/category"><Button
-                variant="contained"
-                color="primary"
-                href="#contained-buttons"
-              >
-                Categorías
-              </Button></Link>
-              
+              <Link to="/comics">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href="#contained-buttons"
+                >
+                  Home
+                </Button>
+              </Link>
+              <Link to="/category">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href="#contained-buttons"
+                >
+                  Categorías
+                </Button>
+              </Link>
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               E-COMICS

@@ -3,7 +3,7 @@
   grid-template-columns: repeat(auto-fill, 230px);
   justify-content: center;
   gap: 90px;
-  padding: 60px;
+  padding: 20px;
   font-family: "Franklin Gothic Medium";
 }
 
@@ -12,7 +12,8 @@
     display: flex;
     justify-content: center;
     gap: 90px;
-    font-size: 24px;
+    font-size: 22px;
+    padding-top: 20px;
 
 }
 

@@ -1,17 +1,18 @@
 .comics{
     display: grid;
-    grid-template-columns: repeat(auto-fill,230px);
+    grid-template-columns: repeat(auto-fill, 240px);
     justify-content: center;
     gap: 90px;
-    padding: 60px;
+    padding: 40px;
     font-family: "Franklin Gothic Medium";
     font-size: 20px;
     
   }
 
   .singleComic{
-    width: 290px;
-    height: auto;
+    padding-top: 1.6em;
+    width: 280px;
+    height: 480px;
   }
 
 .img{
@@ -22,12 +23,14 @@
   }
 
 .img:hover{
-    transition-duration: 500ms;
+    transition-duration: 450ms;
     transform: scale(1.1);
     opacity: 0.9;
     box-shadow: 10px 10px 30px rgba(0,0,0,1);
 }  
-
+.star{
+  display: grid;
+}
 .h1{
     font-size: 25px;
     height: 55px;

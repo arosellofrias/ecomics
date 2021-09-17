@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import styles from "./compStyles/carrito.module.css";
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Checkout from "./Checkout"
 const emailjs = require("emailjs-com");
 emailjs.init("user_swQa08yjju8mCZ64zEuPO");
 
@@ -145,9 +148,13 @@ export default () => {
   return (
     <div>
       <div className={styles.cartItems}>
-        <h3>PRECIO FINAL: {totalTotal}</h3>
+      
+      <h3>DIRECCION DE ENVIO: <br></br> {user.direccion}</h3>
+        
         <br></br>
-        <h3>DIRECCION DE ENVIO: {user.direccion}</h3>
+       
+        <h3>PRECIO FINAL: <br></br> {totalTotal}</h3>
+       
         {valores.length > 0 ? (
           <form onSubmit={(e) => hanldeSubmit(e)}>
             <input
@@ -158,13 +165,15 @@ export default () => {
               onChange={(e) => {
                 handlePago(e);
               }}
-            ></input>
+            ></input><br></br>
             <button type="submit">CHECKOUT</button>
           </form>
         ) : (
           <h1>Carrito Vacío</h1>
         )}
       </div>
+          <br/>
+          <Divider/>
 
       <div className={styles.cartComics}>
         {carritoComics.map((singleCarritoComic, index) => (
@@ -173,9 +182,10 @@ export default () => {
             <img className={styles.img} src={singleCarritoComic.imagenUrl} />
             <div>
               <button>-</button>
-              CANTIDAD
+              <h4>CANTIDAD</h4>
               <button>+</button>
             </div>
+            <br />
             <button
               className={styles.btns}
               onClick={() => deleteComicCarrito(singleCarritoComic.id)}

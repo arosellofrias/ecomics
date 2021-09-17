@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./compStyles/comics.module.css";
 import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
+
 import { reviewRequest } from "../state/review";
+
+
 
 const Comics = () => {
   const dispatch = useDispatch();
   const comics = useSelector((state) => state.comics);
   const comicsByTitle = useSelector((state) => state.comicsByTitle);
 
+  console.log(comics)
   return (
     <div className={styles.comics}>
       {comicsByTitle.length === 0
@@ -34,14 +37,15 @@ const Comics = () => {
                   />
                   <strong>${singleComic.precio}</strong>
                 </Link>
-                <Stack spacing={1}>
+                <div>
                   <Rating
                     name="half-rating"
                     value={total}
                     precision={0.1}
                     readOnly
                   />
-                </Stack>
+              </div>
+                
               </div>
             );
           })

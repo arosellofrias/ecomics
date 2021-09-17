@@ -6,13 +6,12 @@ import { getComicsRequest } from "./state/comics";
 import Comics from "./components/Comics";
 import SingleComic from "./components/SingleComic";
 import Carrito from "./components/Carrito";
-import MangasFilter from "./components/MangasFilter";
-import ComicsFilter from "./components/ComicsFilter";
 import LoginUser from "./components/LoginUser";
-import { Logout } from "./components/Logout";
+import Logout from "./components/Logout";
 import Ordenes from "./components/Ordenes"
 import AdminUsers from './components/AdminUsers'
 import SingleOrder from "./components/SingleOrder"
+import Error from './components/Error';
 
 
 import Register from "./components/Register";
@@ -23,22 +22,12 @@ import Admin from "./components/Admin"
 import AdminCategories from "./components/AdminCategories"
 import CategoriesIndex from "./components/CategoriesIndex"
 import CategoriaPorNombre from "./components/CategoriaPorNombre"
+import Checkout from "./components/Checkout";
 
 function App() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  /* const [comic, setComic] = React.useState("");
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setComic(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(getComicsRequest(comic));
-  };
- */
+  
   useEffect(() => {
     dispatch(getComicsRequest(), []);
   });
@@ -48,9 +37,10 @@ function App() {
       <Navbar />
       {console.log("ISLOGGEDIN===>", isLoggedIn)}
       <Switch>
-        {/* <Route path="/search" component={Search}/> */}
+        <Route exact path="/" component={Comics}/>
         <Route exact path="/comics" component={Comics} />
         <Route path="/comics/:id" component={SingleComic} />
+        <Route path="/checkout" component={Checkout}/ >
         <Route path="/login" component={LoginUser} />
         <Route path="/logout" component={Logout} />
         <Route path="/cart" component={Carrito} />
@@ -61,13 +51,12 @@ function App() {
         <Route path= "/admin/categories" component={AdminCategories}/>
         <Route exact path="/category" component={CategoriesIndex} />
         <Route exact path="/category/:nombre" component={CategoriaPorNombre} />
-        {/* <Route path="/category/mangas" component={MangasFilter} />
-        <Route path="/category/comics" component={ComicsFilter} /> */}
         <Route path ="/edit/:id" component={AdminEdit}/>
         <Route path ="/order" component={Ordenes} />
         <Route path="/singleOrder/:orderId" component={SingleOrder} />
+        <Route path="/404" component={Error}/>
 
-        <Redirect to="/comics" />
+        <Redirect to="/404"/>
       </Switch>
     </div>
   );
