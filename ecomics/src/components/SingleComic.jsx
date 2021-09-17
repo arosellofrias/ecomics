@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { singleComicRequest } from "../state/comics";
@@ -12,9 +12,8 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { reviewRequest } from "../state/review";
 
-const SingleComic = (props) => {
+const SingleComic = () => {
   const dispatch = useDispatch();
-  console.log("PROPS", props);
   const params = useParams();
   const paramsId = params.id;
   const [counter, setCounter] = useState(1);
@@ -71,11 +70,13 @@ const SingleComic = (props) => {
 
   const singleComic = useSelector((state) => state.singleComic);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const soldOut = "https://www.meme-arsenal.com/memes/583a3b2201a13798ea156eaea424ab61.jpg"
 
   return (
-    <div className={styles.container}>
+    <div className={styles.todo}>
       {Object.keys(singleComic).length ? (
         <>
+          <div className={styles.container}>
           <img
             className={`${styles.img} ${styles.column}`}
             src={singleComic.imagenUrl}
@@ -99,22 +100,45 @@ const SingleComic = (props) => {
             <h2 className={styles.h1}>
               Disponibles: <strong>{singleComic.stock}</strong>
             </h2>
-            <div>
+
+            {/* {singleComic.stock===0?(<img className={styles.imgout} src={soldOut}></img>):(<div>
               <button className={styles.h1} onClick={handleSubmit}>
                 Agregar al carrito
               </button>
               <button onClick={descreaseCounter}>-</button>
               <button onClick={increaseCounter}>+</button>
               <strong>{counter}</strong>
+            </div>)} */}
+            
+            {/* <Reviews/> */}
+
+            <div>
+            <div>
+              <button 
+              className={styles.btn}
+              onClick={descreaseCounter}>-</button>
+              <button 
+              className={styles.btn}
+              onClick={increaseCounter}>+</button>
+              <strong>{counter}</strong>
+              </div>
+              <button className={styles.h3} onClick={handleSubmit}>
+                Agregar al carrito
+              </button>
+              
+              
             </div>
-            <Link to="/review" component={Reviews}>
-              <button>Agregar Review</button>
-            </Link>
+          </div>
+
           </div>
         </>
+        
       ) : (
         <h1>Loading..</h1>
       )}
+      <div>
+        <Reviews/>
+        </div>
     </div>
   );
 };

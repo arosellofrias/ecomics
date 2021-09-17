@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import styles from "./compStyles/carrito.module.css";
-import { CloudSharp } from "@material-ui/icons";
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import Checkout from "./Checkout"
 const emailjs = require("emailjs-com");
 emailjs.init("user_swQa08yjju8mCZ64zEuPO");
 
@@ -166,9 +168,13 @@ const handleCantidad = (bool,prodId)=>{
   return (
     <div>
       <div className={styles.cartItems}>
-        <h3>PRECIO FINAL: {totalTotal}</h3>
+      
+      <h3>DIRECCION DE ENVIO: <br></br> {user.direccion}</h3>
+        
         <br></br>
-        <h3>DIRECCION DE ENVIO: {user.direccion}</h3>
+       
+        <h3>PRECIO FINAL: <br></br> {totalTotal}</h3>
+       
         {valores.length > 0 ? (
           <form onSubmit={(e) => hanldeSubmit(e)}>
             <input
@@ -179,13 +185,15 @@ const handleCantidad = (bool,prodId)=>{
               onChange={(e) => {
                 handlePago(e);
               }}
-            ></input>
+            ></input><br></br>
             <button type="submit">CHECKOUT</button>
           </form>
         ) : (
           <h1>Carrito Vacío</h1>
         )}
       </div>
+          <br/>
+          <Divider/>
 
       <div className={styles.cartComics}>
         {carritoComics.map((singleCarritoComic, index) => (
@@ -193,12 +201,16 @@ const handleCantidad = (bool,prodId)=>{
             <h1 className={styles.h1}>{singleCarritoComic.nombre}</h1>
             <img className={styles.img} src={singleCarritoComic.imagenUrl} />
             <div>
+
               {valores.filter(valor=>valor.productId===singleCarritoComic.id).length?(valores.filter(valor=>valor.productId===singleCarritoComic.id)[0].cantidad>1?<button onClick={()=>handleCantidad(false,singleCarritoComic.id)}>-</button>:null):null}
               {
                solucion.filter(sarasa=>sarasa.comic.id===singleCarritoComic.id).length?solucion.filter(sarasa=>sarasa.comic.id===singleCarritoComic.id)[0].cantidad:null
               }
               {valores.filter(valor=>valor.productId===singleCarritoComic.id).length?(valores.filter(valor=>valor.productId===singleCarritoComic.id)[0].cantidad<singleCarritoComic.stock?<button onClick={()=>handleCantidad(true,singleCarritoComic.id)}>+</button>:null):null}
+
+
             </div>
+            <br />
             <button
               className={styles.btns}
               onClick={() => deleteComicCarrito(singleCarritoComic.id,index)}

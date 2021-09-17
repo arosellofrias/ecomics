@@ -22,7 +22,7 @@ const LoginUser = () => {
       icon: "success",
       timer: "2000",
     });
-    history.push("/comic");
+    history.push("/comics");
   };
 
   return (

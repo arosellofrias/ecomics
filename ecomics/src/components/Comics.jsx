@@ -1,43 +1,58 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./compStyles/comics.module.css";
-import { IconButton } from "@material-ui/core";
+import Rating from "@mui/material/Rating";
+
+
+import { reviewRequest } from "../state/review";
+
+
 
 const Comics = () => {
+  const dispatch = useDispatch();
   const comics = useSelector((state) => state.comics);
   const comicsByTitle = useSelector((state) => state.comicsByTitle);
-  const getRandomInt = () => {
-    return Math.floor(Math.random() * (6 - 1)) + 1;
-  };
 
+  console.log(comics)
   return (
     <div className={styles.comics}>
       {comicsByTitle.length === 0
-        ? comics.map((singleComic) => (
-            <div
-              id={singleComic.id}
-              className={styles.singleComic}
-              key={singleComic.id}
-            >
-              <Link to={`/comics/${singleComic.id}`}>
-                <h1 className={styles.h1}>{singleComic.nombre}</h1>
-                <img
-                  className={styles.img}
-                  src={singleComic.imagenUrl}
-                  alt={singleComic.nombre}
-                />
-                <strong>${singleComic.precio}</strong>
-              </Link>
-              <IconButton id={styles.star}>
-                {Array(getRandomInt())
-                  .fill()
-                  .map((_, i) => (
-                    <p>&#11088;</p>
-                  ))}
-              </IconButton>
-            </div>
-          ))
+        ? comics.map((singleComic) => {
+            const posts = singleComic.ratings.length;
+            const totalStars = singleComic.ratings.map((rate) => rate);
+            const suma = totalStars.reduce((a, b) => a + b, 0);
+            const total = suma / posts;
+            return (
+              <div
+                id={singleComic.id}
+                className={styles.singleComic}
+                key={singleComic.id}
+              >
+                <Link to={`/comics/${singleComic.id}`}>
+                  <h1 className={styles.h1}>{singleComic.nombre}</h1>
+                  <img
+                    className={styles.img}
+                    src={singleComic.imagenUrl}
+                    alt={singleComic.nombre}
+                  />
+                  <strong>${singleComic.precio}</strong>
+
+                </Link>
+                <div>
+
+                  <Rating
+                    name="half-rating"
+                    value={total}
+                    precision={0.1}
+                    readOnly
+                  />
+
+              </div>
+
+              </div>
+            );
+          })
         : comicsByTitle.map((singleComic) => (
             <div id={singleComic.id} className={styles.singleComic}>
               <Link to={`/comics/${singleComic.id}`}>

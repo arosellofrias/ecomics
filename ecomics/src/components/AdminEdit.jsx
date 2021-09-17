@@ -10,6 +10,7 @@ import styles from "./compStyles/editSingleComic.module.css";
 import "./compStyles/editComic.css";
 
 const AdminEdit = () => {
+  const user = localStorage.getItem("user");
   const [edit, setEdit] = useState({});
   const dispatch = useDispatch();
   const params = useParams();
@@ -60,7 +61,9 @@ const AdminEdit = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
+    {user && JSON.parse(user).privilegios === true ?
+      <div className={styles.container}>
       <div className="login">
         <form
           className="login_form"
@@ -120,6 +123,10 @@ const AdminEdit = () => {
         </h2>
       </div>
     </div>
+    :
+    <h1>hola</h1>
+  }
+  </div>
   );
 };
 
