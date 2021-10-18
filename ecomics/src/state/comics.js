@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import axios from "axios"
 
 export const getComicsRequest = createAsyncThunk("COMICS", async() => {
 
